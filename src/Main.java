@@ -17,6 +17,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 
 public class Main extends Application {
+    boolean escPressed=false;
+    boolean isMainScene=false;
+    boolean isGameScene=false;
+    boolean isSettingScene=false;
     private static Audio activeClip = null;
     Stage primaryStage;
     private Image image;
@@ -55,6 +59,9 @@ public class Main extends Application {
     }
     public void setMainScene() throws FileNotFoundException
     {
+        isMainScene=true;
+        isGameScene=false;
+        isSettingScene=false;
         Image penguinIcon = new Image(new FileInputStream("src/Sprites/penguinIcon.png"));
         ImageView penguinIconView = new ImageView(penguinIcon);
         Image playButton = new Image(new FileInputStream("src/Sprites/playButton.png"));
@@ -83,7 +90,8 @@ public class Main extends Application {
             }
             catch(Exception A)
             {
-                System.out.println("File Not Found");
+                System.out.println("File Not Found: GameScene");
+                System.out.println(A);
             }
         });
 
@@ -91,14 +99,16 @@ public class Main extends Application {
             KeyCode code = e.getCode();
             switch (code) {
                 case ESCAPE:
+
                     try
                     {
                         setSettingsScene();
                     }
                     catch(Exception B)
                     {
-                        System.out.println("File Not Found");
+                        System.out.println("File Not Found: settingScene");
                     }
+
                 default:
                     break;
             }
@@ -107,6 +117,9 @@ public class Main extends Application {
 
     public void setGameScene() throws FileNotFoundException
     {
+        isMainScene=false;
+        isGameScene=true;
+        isSettingScene=false;
         Image iceburgImage = new Image(new FileInputStream("src/Sprites/iceburg.png"));
         ImageView iceburgImageView = new ImageView(iceburgImage);
         Image gsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
@@ -121,15 +134,23 @@ public class Main extends Application {
         ImageView mamaPenguinImageView = new ImageView(mamaPenguinImage);
         Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/babyPenguin.png"));
         ImageView babyPenguinImageView = new ImageView(babyPenguinImage);
+        Image papaPortraitImage = new Image(new FileInputStream("src/Sprites/papaPortrait.png"));
+        ImageView papaPortraitImageView = new ImageView(papaPortraitImage);
+        Image mamaPortraitImage = new Image(new FileInputStream("src/Sprites/mamaPortrait.png"));
+        ImageView mamaPortraitImageView = new ImageView(mamaPortraitImage);
+        Image babyPortraitImage = new Image(new FileInputStream("src/Sprites/babyPortrait.png"));
+        ImageView babyPortraitImageView = new ImageView(babyPortraitImage);
+        Image textBubbleImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView textBubbleImageView = new ImageView(textBubbleImage);
 
 
         mainGroup.getChildren().remove(mainPane);
-        gamePane.getChildren().addAll(iceburgImageView, gsbackButtonImageView, settingsButtonView,iglooImageView,papaPenguinImageView,mamaPenguinImageView,babyPenguinImageView);
+        gamePane.getChildren().addAll(iceburgImageView, gsbackButtonImageView, settingsButtonView,iglooImageView,papaPenguinImageView,mamaPenguinImageView,babyPenguinImageView,textBubbleImageView);
         mainGroup.getChildren().add(gamePane);
 
         iceburgImageView.setFitHeight(500);
         iceburgImageView.setFitWidth(1000);
-        iceburgImageView.setTranslateY(250);
+        iceburgImageView.setTranslateY(270);
         iceburgImageView.setTranslateX(200);
         iceburgImageView.setPreserveRatio(true);
 
@@ -147,27 +168,32 @@ public class Main extends Application {
 
         iglooImageView.setFitHeight(170);
         iglooImageView.setFitWidth(170);
-        iglooImageView.setTranslateY(120);
+        iglooImageView.setTranslateY(140);
         iglooImageView.setTranslateX(200);
         iglooImageView.setPreserveRatio(true);
 
         papaPenguinImageView.setFitHeight(180);
         papaPenguinImageView.setFitWidth(180);
-        papaPenguinImageView.setTranslateY(170);
+        papaPenguinImageView.setTranslateY(190);
         papaPenguinImageView.setTranslateX(400);
         papaPenguinImageView.setPreserveRatio(true);
 
         mamaPenguinImageView.setFitHeight(200);
         mamaPenguinImageView.setFitWidth(200);
-        mamaPenguinImageView.setTranslateY(185);
+        mamaPenguinImageView.setTranslateY(205);
         mamaPenguinImageView.setTranslateX(0);
         mamaPenguinImageView.setPreserveRatio(true);
 
         babyPenguinImageView.setFitHeight(150);
         babyPenguinImageView.setFitWidth(150);
-        babyPenguinImageView.setTranslateY(280);
+        babyPenguinImageView.setTranslateY(300);
         babyPenguinImageView.setTranslateX(200);
         babyPenguinImageView.setPreserveRatio(true);
+
+        textBubbleImageView.setFitHeight(200);
+        textBubbleImageView.setFitWidth(400);
+        textBubbleImageView.setTranslateY(-140);
+        textBubbleImageView.setTranslateX(250);
 
 
         gsbackButtonImageView.setOnMouseClicked(mouseEvent ->
@@ -183,7 +209,7 @@ public class Main extends Application {
                     }
                     catch(Exception C)
                     {
-                        System.out.println("File Not Found");
+                        System.out.println("File Not Found:sertingsButton");
                     }
                 }
         );
@@ -193,6 +219,9 @@ public class Main extends Application {
 
     public void setSettingsScene() throws FileNotFoundException
     {
+        isMainScene=false;
+        isGameScene=false;
+        isSettingScene=true;
         Image ssbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
         ImageView ssbackButtonImageView = new ImageView(ssbackButtonImage);
         Image backgroundTextImage = new Image(new FileInputStream("src/Sprites/backgroundMusicText.png"));
