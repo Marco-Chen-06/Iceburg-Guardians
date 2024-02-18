@@ -1,34 +1,22 @@
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
-import java.util.ArrayList;
 
 public class Main extends Application {
+    private static int iceCubes = 0; //currency for the game
     private static int speechIndex;
     private static int fishingSpeechIndex=0;
     boolean escPressed=false;
@@ -241,12 +229,15 @@ public class Main extends Application {
         ImageView rightArrowImageView = new ImageView(rightArrowImage);
         Image shopImage = new Image(new FileInputStream("src/Sprites/shop.png"));
         ImageView shopImageView = new ImageView(shopImage);
+        Image iceCubeImage = new Image(new FileInputStream("src/Sprites/icecubes.png"));
+        ImageView iceCubeImageView = new ImageView(iceCubeImage);
 
         Text gameSpeech = new Text(speech1);
+        Text iceCubeTextHolder = new Text("0");
 
 
 //        mainGroup.getChildren().remove(mainPane);
-        gamePane.getChildren().addAll(iceburgImageView, gsbackButtonImageView, settingsButtonView,iglooImageView,papaPenguinImageView,mamaPenguinImageView,babyPenguinImageView,textBubbleImageView,papaPortraitImageView, mamaPortraitImageView, babyPortraitImageView, leftArrowImageView,rightArrowImageView, shopImageView);
+        gamePane.getChildren().addAll(iceburgImageView, gsbackButtonImageView, settingsButtonView,iglooImageView,papaPenguinImageView,mamaPenguinImageView,babyPenguinImageView,textBubbleImageView,papaPortraitImageView, mamaPortraitImageView, babyPortraitImageView, leftArrowImageView,rightArrowImageView, shopImageView, iceCubeImageView, iceCubeTextHolder);
         gamePane.getChildren().add(gameSpeech);
         mainGroup.getChildren().add(gamePane);
 
@@ -330,11 +321,31 @@ public class Main extends Application {
         shopImageView.setTranslateX(770);
         shopImageView.setPreserveRatio(true);
 
+        iceCubeImageView.setFitHeight(75);
+        iceCubeImageView.setFitWidth(75);
+        iceCubeImageView.setTranslateY(500);
+        iceCubeImageView.setTranslateX(-450);
+        iceCubeImageView.setPreserveRatio(true);
+
+        iceCubeTextHolder.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        iceCubeTextHolder.setTranslateY(495);
+        iceCubeTextHolder.setTranslateX(-400);
 
         gameSpeech.setTranslateY(-100);
         gameSpeech.setTranslateX(350);
 
         gameSpeech.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth = iceCubeTextHolder.getLayoutBounds().getWidth();
+        iceCubeTextHolder.setWrappingWidth(initialWidth - 200);
+
+        iceCubeTextHolder.setTranslateX(-500);
+
+        //creates a thread that constantly updates the text of gsIceCubeRunnable
+        IceCubeRunnable gsIceCubeRunnable = new IceCubeRunnable(iceCubeTextHolder);
+        Thread gsThread = new Thread(gsIceCubeRunnable);
+        gsThread.start();
 
 
         gsbackButtonImageView.setOnMouseClicked(mouseEvent ->
@@ -480,6 +491,8 @@ public class Main extends Application {
                     System.out.println("opening shopScene");
                     openShopScene();
                 });
+
+
 
 
 
@@ -639,6 +652,9 @@ public class Main extends Application {
         Image rightArrowImage = new Image(new FileInputStream("src/Sprites/rightArrow.png"));
         ImageView rightArrowImageView = new ImageView(rightArrowImage);
         Image shopImage = new Image(new FileInputStream("src/Sprites/shop.png"));
+        Image iceCubeImage = new Image(new FileInputStream("src/Sprites/icecubes.png"));
+        ImageView iceCubeImageView = new ImageView(iceCubeImage);
+        Text pgsIceCubeTextHolder = new Text("");
 
         Image appleImage = new Image(new FileInputStream("src/MinigameSprites/Compost/apple.png"));
         Image bananaImage = new Image(new FileInputStream("src/MinigameSprites/Compost/banana.png"));
@@ -680,7 +696,7 @@ public class Main extends Application {
         Text plasticText = new Text("Plastic");
 
         mainGroup.getChildren().add(papaGamePane);
-        papaGamePane.getChildren().addAll(pgsbackButtonImageView, papaPenguinImageView,mamaPenguinImageView,babyPenguinImageView,fishingpondImageView,textBubbleImageView,papaPortraitImageView,leftArrowImageView,rightArrowImageView, fishingItemImageView, confettiGIFImageView);
+        papaGamePane.getChildren().addAll(pgsbackButtonImageView, papaPenguinImageView,mamaPenguinImageView,babyPenguinImageView,fishingpondImageView,textBubbleImageView,papaPortraitImageView,leftArrowImageView,rightArrowImageView, fishingItemImageView, confettiGIFImageView, iceCubeImageView, pgsIceCubeTextHolder);
         papaGamePane.getChildren().addAll(gameSpeech,compostText,paperText,plasticText);
 
         pgsbackButtonImageView.setFitHeight(100);
@@ -734,6 +750,27 @@ public class Main extends Application {
         rightArrowImageView.setTranslateY(-30);
         rightArrowImageView.setTranslateX(700);
         rightArrowImageView.setPreserveRatio(true);
+
+        iceCubeImageView.setFitHeight(75);
+        iceCubeImageView.setFitWidth(75);
+        iceCubeImageView.setTranslateY(500);
+        iceCubeImageView.setTranslateX(-450);
+        iceCubeImageView.setPreserveRatio(true);
+
+        pgsIceCubeTextHolder.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        pgsIceCubeTextHolder.setTranslateY(495);
+        pgsIceCubeTextHolder.setTranslateX(-400);
+
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth = pgsIceCubeTextHolder.getLayoutBounds().getWidth();
+        pgsIceCubeTextHolder.setWrappingWidth(initialWidth - 200);
+
+        pgsIceCubeTextHolder.setTranslateX(-510);
+
+        //creates a thread that constantly updates the text of gsIceCubeRunnable
+        IceCubeRunnable pgsIceCubeRunnable = new IceCubeRunnable(pgsIceCubeTextHolder);
+        Thread pgsThread = new Thread(pgsIceCubeRunnable);
+        pgsThread.start();
 
 
 
@@ -852,6 +889,7 @@ public class Main extends Application {
         {
             if (isLandfill)
             {
+                iceCubes += 1;
                 System.out.println("landfill correct");
                 startFishingConfettiAnimation(confettiGIFImageView);
 //                confettiGIFImageView.setTranslateX(250);
@@ -859,6 +897,7 @@ public class Main extends Application {
             }
             else if (isBonus)
             {
+                iceCubes += 5;
                 System.out.println("was bonus, very good");
                 startFishingConfettiAnimation(confettiGIFImageView);
 //                confettiGIFImageView.setTranslateX(250);
@@ -883,11 +922,13 @@ public class Main extends Application {
         {
             if (isPlastic)
             {
+                iceCubes += 1;
                 System.out.println("compost correct");
                 startFishingConfettiAnimation(confettiGIFImageView);
             }
             else if (isBonus)
             {
+                iceCubes += 5;
                 System.out.println("was bonus, very good");
                 startFishingConfettiAnimation(confettiGIFImageView);
             }
@@ -909,11 +950,13 @@ public class Main extends Application {
         {
             if (isCompost)
             {
+                iceCubes += 1;
                 System.out.println("plastic correct");
                 startFishingConfettiAnimation(confettiGIFImageView);
             }
             else if (isBonus)
             {
+                iceCubes += 5;
                 System.out.println("was bonus, very good");
                 startFishingConfettiAnimation(confettiGIFImageView);
             }
@@ -1333,6 +1376,17 @@ public class Main extends Application {
         //starts the actual transition
         fadeInTransition.play();
     }
+    //returns total amount of iceCubes
+    public static int getIceCubes()
+    {
+        return iceCubes;
+    }
+
+    public static void setIceCubes(int num)
+    {
+        iceCubes = num;
+    }
+
 
 
 
