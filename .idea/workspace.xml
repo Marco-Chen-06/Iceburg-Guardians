@@ -2,10 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99944dbe-639a-437e-ab7b-350d1a7900b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/leftArrow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/rightArrow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/shop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Effects/confetti.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Bonus/fish.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Bonus/krill.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Compost/apple.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Compost/banana.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Landfill/cardboard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Landfill/newspaper.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Plastic/milk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Plastic/waterBottle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/astronautPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/cleanbabyPenguin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/cleanmamaPenguin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/cleanpapaPenguin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/cyborgPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/fishingpond.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/icecubes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/kingPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/neoSamuraiPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/poity1PenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/popStartPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/saxophonePenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/tuxPenguinPlush.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -51,8 +69,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Sprites" />
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Audio" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Effects" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Bonus" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Recycle" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Landfill" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Compost" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -112,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708194662182</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added text and placeholder minigames">
+      <created>1708214609908</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708214609908</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,7 +157,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added initial code for game" />
     <MESSAGE value="Added GUI without functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added GUI without functionality" />
+    <MESSAGE value="Added text and placeholder minigames" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added text and placeholder minigames" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
