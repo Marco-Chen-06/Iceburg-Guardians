@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
@@ -18,6 +19,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main extends Application {
+    Text pulltext = new Text("What did you get?");
+    Image tuxPenguinImage = new Image(new FileInputStream("src/Sprites/tuxPenguinPlush.png"));
+    ImageView tuxPenguinImageView = new ImageView(tuxPenguinImage);
+    Image astronautPenguinImage = new Image(new FileInputStream("src/Sprites/astronautPenguinPlush.png"));
+    ImageView astronautPenguinImageView = new ImageView(astronautPenguinImage);
+    Image cyborgPenguinImage = new Image(new FileInputStream("src/Sprites/cyborgPenguinPlush.png"));
+    ImageView cyborgPenguinImageView = new ImageView(cyborgPenguinImage);
+    Image kingPenguinImage = new Image(new FileInputStream("src/Sprites/kingPenguinPlush.png"));
+    ImageView kingPenguinImageView = new ImageView(kingPenguinImage);
+    Image rockStarPenguinImage = new Image(new FileInputStream("src/Sprites/rockStarPenguinPlush.png"));
+    ImageView rockStarPenguinImageView = new ImageView(rockStarPenguinImage);
+    Image saxophonePenguinImage = new Image(new FileInputStream("src/Sprites/saxophonePenguinPlush.png"));
+    ImageView saxophonePenguinImageView = new ImageView(saxophonePenguinImage);
+    Image neoSamuraiPenguinImage = new Image(new FileInputStream("src/Sprites/neoSamuraiPenguinPlush.png"));
+    ImageView neoSamuraiPenguinImageView = new ImageView(neoSamuraiPenguinImage);
+    Image popStarPenguinImage = new Image(new FileInputStream("src/Sprites/popStarPenguinPlush.png"));
+    ImageView popStarPenguinImageView = new ImageView(popStarPenguinImage);
+    String pullName = "";
     private static int iceCubes = 0; //currency for the game
     private static int speechIndex;
     private static int quizGacha = 0;
@@ -53,6 +72,8 @@ public class Main extends Application {
     StackPane papaGamePane = new StackPane();
     StackPane mamaGamePane = new StackPane();
     StackPane shopPane = new StackPane();
+    StackPane pullPane = new StackPane();
+    StackPane inventoryPane = new StackPane();
     Group mainGroup = new Group();
     Scene mainScene = new Scene(mainGroup,SCENE_WIDTH,SCENE_HEIGHT,true, SceneAntialiasing.BALANCED);
     private static final String PENGUIN_ICON_PATH = "/penguinIcon.png";
@@ -103,6 +124,9 @@ public class Main extends Application {
 
     String[] fishingSpeechArr = {fishingSpeech1,fishingSpeech2,fishingSpeech3,fishingSpeech4,fishingSpeech5,fishingSpeech6,fishingSpeech7};
 
+    public Main() throws FileNotFoundException {
+    }
+
     public static void main(String[] args)
     {
 //        Windows windows = new Windows();
@@ -131,6 +155,63 @@ public class Main extends Application {
         mainGroup.getChildren().remove(mamaGamePane);
         setShopScene();
         mainGroup.getChildren().remove(shopPane);
+        setPullScene();
+        mainGroup.getChildren().remove(pullPane);
+        setInventoryScene();
+        mainGroup.getChildren().remove(inventoryPane);
+
+        pulltext.setTranslateY(-250);
+        pulltext.setTranslateX(150);
+
+        pulltext.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+
+        popStarPenguinImageView.setFitWidth(400);
+        popStarPenguinImageView.setFitHeight(600);
+        popStarPenguinImageView.setTranslateX(350);
+        popStarPenguinImageView.setTranslateY(200);
+//        popStarPenguinImageView.setPreserveRatio(true);
+
+        tuxPenguinImageView.setFitWidth(400);
+        tuxPenguinImageView.setFitHeight(600);
+        tuxPenguinImageView.setTranslateX(350);
+        tuxPenguinImageView.setTranslateY(200);
+//        tuxPenguinImageView.setPreserveRatio(true);
+
+        kingPenguinImageView.setFitWidth(400);
+        kingPenguinImageView.setFitHeight(600);
+        kingPenguinImageView.setTranslateX(350);
+        kingPenguinImageView.setTranslateY(200);
+//        kingPenguinImageView.setPreserveRatio(true);
+
+        rockStarPenguinImageView.setFitWidth(400);
+        rockStarPenguinImageView.setFitHeight(600);
+        rockStarPenguinImageView.setTranslateX(350);
+        rockStarPenguinImageView.setTranslateY(200);
+//        rockStarPenguinImageView.setPreserveRatio(true);
+
+        neoSamuraiPenguinImageView.setFitWidth(400);
+        neoSamuraiPenguinImageView.setFitHeight(600);
+        neoSamuraiPenguinImageView.setTranslateX(350);
+        neoSamuraiPenguinImageView.setTranslateY(200);
+//        neoSamuraiPenguinImageView.setPreserveRatio(true);
+
+        astronautPenguinImageView.setFitWidth(400);
+        astronautPenguinImageView.setFitHeight(600);
+        astronautPenguinImageView.setTranslateX(350);
+        astronautPenguinImageView.setTranslateY(200);
+//        astronautPenguinImageView.setPreserveRatio(true);
+
+        saxophonePenguinImageView.setFitWidth(400);
+        saxophonePenguinImageView.setFitHeight(600);
+        saxophonePenguinImageView.setTranslateX(350);
+        saxophonePenguinImageView.setTranslateY(200);
+//        saxophonePenguinImageView.setPreserveRatio(true);
+
+        cyborgPenguinImageView.setFitWidth(400);
+        cyborgPenguinImageView.setFitHeight(600);
+        cyborgPenguinImageView.setTranslateX(350);
+        cyborgPenguinImageView.setTranslateY(200);
+//        cyborgPenguinImageView.setPreserveRatio(true);
 
         playBackground();
     }
@@ -492,10 +573,10 @@ public class Main extends Application {
         );
 
         shopImageView.setOnMouseClicked(mouseEvent ->
-                {
-                    System.out.println("opening shopScene");
-                    openShopScene();
-                });
+        {
+            System.out.println("opening shopScene");
+            openShopScene();
+        });
 
 
 
@@ -522,6 +603,10 @@ public class Main extends Application {
         ImageView greenOnImageView = new ImageView(greenOnImage);
         Image greenOffImage = new Image(new FileInputStream("src/Sprites/greenOff.png"));
         ImageView greenOffImageView = new ImageView(greenOffImage);
+        Image inventoryImage = new Image(new FileInputStream("src/Sprites/inventory.png"));
+        ImageView inventoryImageView = new ImageView(inventoryImage);
+        Image enterCodeImage = new Image(new FileInputStream("src/Sprites/enterCode.png"));
+        ImageView enterCodeImageView = new ImageView(enterCodeImage);
 //        mainGroup.getChildren().remove(mainPane);
 //        mainGroup.getChildren().remove(gamePane);
         mainGroup.getChildren().add(settingsPane);
@@ -562,7 +647,19 @@ public class Main extends Application {
         blankOffImageView.setFitWidth(100);
         blankOffImageView.setPreserveRatio(true);
 
-        settingsPane.getChildren().addAll(ssbackButtonImageView, backgroundTextImageView, greenOnImageView, blankOffImageView);
+        inventoryImageView.setTranslateX(360);
+        inventoryImageView.setTranslateY(350);
+        inventoryImageView.setFitHeight(200);
+        inventoryImageView.setFitWidth(400);
+        inventoryImageView.setPreserveRatio(true);
+
+        enterCodeImageView.setTranslateX(360);
+        enterCodeImageView.setTranslateY(500);
+        enterCodeImageView.setFitHeight(200);
+        enterCodeImageView.setFitWidth(400);
+        enterCodeImageView.setPreserveRatio(true);
+
+        settingsPane.getChildren().addAll(ssbackButtonImageView, backgroundTextImageView, greenOnImageView, blankOffImageView,enterCodeImageView,inventoryImageView);
 
         ssbackButtonImageView.setOnMouseClicked(mouseEvent ->
         {
@@ -721,35 +818,125 @@ public class Main extends Application {
 
         //I will code all the logic for quiz here and move down later possibly -----------
         firstChoiceImageView.setOnMouseClicked(mouseEvent ->
-                {
-                    if (quizGacha == 0) //why recycle question (incorrect)
-                    {
-                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
-                    }
-                });
+        {
+            if (quizGacha == 0) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 1) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 2) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 3) //why recycle question (incorrect)
+            {
+                iceCubes += 5;
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                startQuizConfettiAnimation(confettiGIFImageView);
+            }
+            if (quizGacha == 4) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 5) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+        });
         secondChoiceImageView.setOnMouseClicked(mouseEvent ->
-                {
-                    if (quizGacha == 0) //why recycle question (correct)
-                    {
-                        iceCubes += 5;
-                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
-                        startQuizConfettiAnimation(confettiGIFImageView);
-                    }
-                });
+        {
+            if (quizGacha == 0) //why recycle question (correct)
+            {
+                iceCubes += 5;
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                startQuizConfettiAnimation(confettiGIFImageView);
+            }
+            if (quizGacha == 1) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 2) //why recycle question (incorrect)
+            {
+                iceCubes += 5;
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                startQuizConfettiAnimation(confettiGIFImageView);
+            }
+            if (quizGacha == 3) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 4) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 5) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+        });
         thirdChoiceImageView.setOnMouseClicked(mouseEvent ->
-                {
-                    if (quizGacha == 0) //why recycle question (incorrect)
-                    {
-                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
-                    }
-                });
+        {
+            if (quizGacha == 0) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 1) //why recycle question (incorrect)
+            {
+                iceCubes += 5;
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                startQuizConfettiAnimation(confettiGIFImageView);
+            }
+            if (quizGacha == 2) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 3) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 4) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 5) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+        });
         fourthChoiceImageView.setOnMouseClicked(mouseEvent ->
-                {
-                    if (quizGacha == 0) //why recycle question (incorrect)
-                    {
-                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
-                    }
-                });
+        {
+            if (quizGacha == 0) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 1) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 2) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 3) //why recycle question (incorrect)
+            {
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+            }
+            if (quizGacha == 4) //why recycle question (incorrect)
+            {
+                iceCubes += 5;
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                startQuizConfettiAnimation(confettiGIFImageView);
+            }
+            if (quizGacha == 5) //why recycle question (incorrect)
+            {
+                iceCubes += 5;
+                updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                startQuizConfettiAnimation(confettiGIFImageView);
+            }
+        });
 
         //--------------------------------------------------------------------------------
 
@@ -775,7 +962,7 @@ public class Main extends Application {
 
         bgsbackButtonImageView.setOnMouseClicked(mouseEvent ->
         {
-            System.out.println("closing babyGameScene and opening papaGameScene");
+            System.out.println("closing babyGameScene and opening gameScene");
             openGameScene();
             //backGame();
         });
@@ -783,7 +970,7 @@ public class Main extends Application {
     }
     private void updateQuestion(Text questionText, Text firstChoiceText, Text secondChoiceText, Text thirdChoiceText, Text fourthChoiceText)
     {
-        quizGacha = getRandomNumber(0, 0); //rolls a random number from 0 to 0
+        quizGacha = getRandomNumber(0, 5); //rolls a random number from 0 to 0
         if (quizGacha == 0)
         {
             questionText.setText("Why is it important to recycle?");
@@ -791,6 +978,46 @@ public class Main extends Application {
             secondChoiceText.setText("To help keep the Earth safe and clean!");
             thirdChoiceText.setText("Recycling is not important!");
             fourthChoiceText.setText("To build more factories!!!!!!!!!");
+        }
+        if (quizGacha == 1)
+        {
+            questionText.setText("What are three categories for things that should be recycled?");
+            firstChoiceText.setText("Compost, Paper, Confetti");
+            secondChoiceText.setText("Water, Garbage, Landfill");
+            thirdChoiceText.setText("Plastic, Paper, Compost");
+            fourthChoiceText.setText("apple, plastic bottle, newspaper");
+        }
+        if (quizGacha == 2)
+        {
+            questionText.setText("The term 'Reduce' refers to: ");
+            firstChoiceText.setText("Use something over and over again");
+            secondChoiceText.setText("Use less of something, creating less waste.");
+            thirdChoiceText.setText("Make something into something new.");
+            fourthChoiceText.setText("Make something ugly into something beautiful.");
+        }
+        if (quizGacha == 3)
+        {
+            questionText.setText("The term 'recycle' means:  ");
+            firstChoiceText.setText("Make something into something new.");
+            secondChoiceText.setText("Throwing out Trash.");
+            thirdChoiceText.setText("Ride your bike");
+            fourthChoiceText.setText("Use something again.");
+        }
+        if (quizGacha == 3)
+        {
+            questionText.setText("The term 'reuse' means:  ");
+            firstChoiceText.setText("Make something into something new.");
+            secondChoiceText.setText("Throwing out Trash.");
+            thirdChoiceText.setText("Ride your bike");
+            fourthChoiceText.setText("Use something again.");
+        }
+        if (quizGacha==5)
+        {
+            questionText.setText("Which of the following is not recyclable material?");
+            firstChoiceText.setText("Plastic.");
+            secondChoiceText.setText("Paper.");
+            thirdChoiceText.setText("Metal");
+            fourthChoiceText.setText("Food.");
         }
     }
     public void setPapaGameScene() throws FileNotFoundException
@@ -1138,6 +1365,19 @@ public class Main extends Application {
     }
     public void setMamaGameScene() throws FileNotFoundException
     {
+        Image confettiGIF = new Image(new FileInputStream("src/Effects/confetti.gif"));
+        ImageView confettiGIFImageView = new ImageView(confettiGIF);
+        //hides the confetti initially
+        //the real translate values are in the startConfettiAnimation() method
+        confettiGIFImageView.setTranslateY(-2000);
+        confettiGIFImageView.setTranslateX(-2000);
+        confettiGIFImageView.setFitHeight(350);
+        confettiGIFImageView.setFitWidth(500);
+
+        Image iceCubeImage = new Image(new FileInputStream("src/Sprites/icecubes.png"));
+        ImageView iceCubeImageView = new ImageView(iceCubeImage);
+        Text mgsIceCubeTextHolder = new Text("");
+
         Image mgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
         ImageView mgsbackButtonImageView = new ImageView(mgsbackButtonImage);
         Image papaPenguinImage = new Image(new FileInputStream("src/Sprites/papaPenguin.png"));
@@ -1152,62 +1392,107 @@ public class Main extends Application {
         ImageView mamaPortraitImageView = new ImageView(mamaPortraitImage);
         Image defaultCardImage = new Image(new FileInputStream("src/MinigameSprites/MatchingGame/defaultCard.png"));
         Image iceCard = new Image(new FileInputStream("src/MinigameSprites/MatchingGame/iceCard.png"));
-        ImageView defaultCardImageView1 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView2 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView3 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView4 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView5 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView6 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView7 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView8 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView9 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView10 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView11 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView12 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView13 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView14 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView15 = new ImageView(defaultCardImage);
-        ImageView defaultCardImageView16 = new ImageView(defaultCardImage);
+        ImageView card1 = new ImageView(iceCard);
+        ImageView card2 = new ImageView(iceCard);
+        ImageView card3 = new ImageView(iceCard);
+        ImageView card4 = new ImageView(iceCard);
+        ImageView card5 = new ImageView(iceCard);
+        ImageView card6 = new ImageView(iceCard);
+        ImageView card7 = new ImageView(iceCard);
+        ImageView card8 = new ImageView(iceCard);
+        ImageView card9 = new ImageView(iceCard);
+        ImageView card10 = new ImageView(iceCard);
+        ImageView card11 = new ImageView(iceCard);
+        ImageView card12 = new ImageView(iceCard);
+        ImageView card13 = new ImageView(iceCard);
+        ImageView card14 = new ImageView(iceCard);
+        ImageView card15 = new ImageView(iceCard);
+        ImageView card16 = new ImageView(iceCard);
+//
+//
+//        ImageView placeholderView1 = new ImageView(iceCard);
+//        ImageView placeholderView2 = new ImageView(iceCard);
+//        ImageView placeholderView3 = new ImageView(iceCard);
+//        ImageView placeholderView4 = new ImageView(iceCard);
+//        ImageView placeholderView5 = new ImageView(iceCard);
+//        ImageView placeholderView6 = new ImageView(iceCard);
+//        ImageView placeholderView7 = new ImageView(iceCard);
+//        ImageView placeholderView8 = new ImageView(iceCard);
+//        ImageView placeholderView9 = new ImageView(iceCard);
+//        ImageView placeholderView10 = new ImageView(iceCard);
+//        ImageView placeholderView11 = new ImageView(iceCard);
+//        ImageView placeholderView12 = new ImageView(iceCard);
+//        ImageView placeholderView13 = new ImageView(iceCard);
+//        ImageView placeholderView14 = new ImageView(iceCard);
+//        ImageView placeholderView15 = new ImageView(iceCard);
+//        ImageView placeholderView16 = new ImageView(iceCard);
 
+        Image appleImage1 = new Image(new FileInputStream("src/MinigameSprites/Compost/apple.png"));
+        Image appleImage2 = new Image(new FileInputStream("src/MinigameSprites/Compost/apple.png"));
+        Image bananaImage1 = new Image(new FileInputStream("src/MinigameSprites/Compost/banana.png"));
+        Image bananaImage2 = new Image(new FileInputStream("src/MinigameSprites/Compost/banana.png"));
+        Image cardboardImage1 = new Image(new FileInputStream("src/MinigameSprites/Landfill/cardboard.png"));
+        Image cardboardImage2 = new Image(new FileInputStream("src/MinigameSprites/Landfill/cardboard.png"));
+        Image newspaperImage1 = new Image(new FileInputStream("src/MinigameSprites/Landfill/newspaper.png"));
+        Image newspaperImage2 = new Image(new FileInputStream("src/MinigameSprites/Landfill/newspaper.png"));
+        Image milkImage1 = new Image(new FileInputStream("src/MinigameSprites/Plastic/milk.png"));
+        Image milkImage2 = new Image(new FileInputStream("src/MinigameSprites/Plastic/milk.png"));
+        Image waterBottleImage1 = new Image(new FileInputStream("src/MinigameSprites/Plastic/waterBottle.png"));
+        Image waterBottleImage2 = new Image(new FileInputStream("src/MinigameSprites/Plastic/waterBottle.png"));
+        Image fishImage1 = new Image(new FileInputStream("src/MinigameSprites/Bonus/fish.png"));
+        Image fishImage2 = new Image(new FileInputStream("src/MinigameSprites/Bonus/fish.png"));
+        Image krillImage1 = new Image(new FileInputStream("src/MinigameSprites/Bonus/krill.png"));
+        Image krillImage2 = new Image(new FileInputStream("src/MinigameSprites/Bonus/krill.png"));
 
-        ImageView placeholderView1 = new ImageView(iceCard);
-        ImageView placeholderView2 = new ImageView(iceCard);
-        ImageView placeholderView3 = new ImageView(iceCard);
-        ImageView placeholderView4 = new ImageView(iceCard);
-        ImageView placeholderView5 = new ImageView(iceCard);
-        ImageView placeholderView6 = new ImageView(iceCard);
-        ImageView placeholderView7 = new ImageView(iceCard);
-        ImageView placeholderView8 = new ImageView(iceCard);
-        ImageView placeholderView9 = new ImageView(iceCard);
-        ImageView placeholderView10 = new ImageView(iceCard);
-        ImageView placeholderView11 = new ImageView(iceCard);
-        ImageView placeholderView12 = new ImageView(iceCard);
-        ImageView placeholderView13 = new ImageView(iceCard);
-        ImageView placeholderView14 = new ImageView(iceCard);
-        ImageView placeholderView15 = new ImageView(iceCard);
-        ImageView placeholderView16 = new ImageView(iceCard);
+        Image[] appleImageArr = {appleImage1, appleImage2};
+        Image[] bananaImageArr = {bananaImage1, bananaImage2};
+        Image[] cardboardImageArr = {cardboardImage1, cardboardImage2};
+        Image[] newspaperImageArr = {newspaperImage1, newspaperImage2};
+        Image[] milkImageArr = {milkImage1, milkImage2};
+        Image[] waterBottleImageArr = {waterBottleImage1, waterBottleImage2};
+        Image[] fishImageArr = {fishImage1, fishImage2};
+        Image[] krillImageArr = {krillImage1, krillImage2};
 
-        ArrayList<ImageView> placeholderList = new ArrayList<>();
-        placeholderList.addAll(Arrays.asList(placeholderView1,placeholderView2,placeholderView3,placeholderView4,placeholderView5,placeholderView6,placeholderView7,placeholderView8,placeholderView9,placeholderView10,placeholderView11,placeholderView12,placeholderView13,placeholderView14,placeholderView15,placeholderView16));
+        Image[] currentImageList = {appleImage1, appleImage2, bananaImage1, bananaImage2, cardboardImage1, cardboardImage2, newspaperImage1,
+                newspaperImage2, milkImage1, milkImage2, waterBottleImage1, waterBottleImage2, fishImage1, fishImage2, krillImage1, krillImage2};
+
+        ArrayList<ImageView> cardArr = new ArrayList<>();
+        cardArr.add(card1);
+        cardArr.add(card2);
+        cardArr.add(card3);
+        cardArr.add(card4);
+        cardArr.add(card5);
+        cardArr.add(card6);
+        cardArr.add(card7);
+        cardArr.add(card8);
+        cardArr.add(card9);
+        cardArr.add(card10);
+        cardArr.add(card11);
+        cardArr.add(card12);
+        cardArr.add(card13);
+        cardArr.add(card14);
+        cardArr.add(card15);
+        cardArr.add(card16);
+
 
         mainGroup.getChildren().add(mamaGamePane);
         mamaGamePane.getChildren().add(textBubbleImageView);
-        mamaGamePane.getChildren().addAll(placeholderView1,placeholderView2,placeholderView3,placeholderView4,placeholderView5,placeholderView6,placeholderView7,placeholderView8,placeholderView9,placeholderView10,placeholderView11,placeholderView12,placeholderView13,placeholderView14,placeholderView15,placeholderView16);
-        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView,defaultCardImageView1,defaultCardImageView2,defaultCardImageView3,defaultCardImageView4,defaultCardImageView5,defaultCardImageView6,defaultCardImageView7,defaultCardImageView8,defaultCardImageView9,defaultCardImageView10,defaultCardImageView11,defaultCardImageView12,defaultCardImageView13,defaultCardImageView14,defaultCardImageView15,defaultCardImageView16);
+//        mamaGamePane.getChildren().addAll(placeholderView1,placeholderView2,placeholderView3,placeholderView4,placeholderView5,placeholderView6,placeholderView7,placeholderView8,placeholderView9,placeholderView10,placeholderView11,placeholderView12,placeholderView13,placeholderView14,placeholderView15,placeholderView16);
+        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView, confettiGIFImageView, card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16, mgsIceCubeTextHolder, iceCubeImageView);
 
         mamaPortraitImageView.setFitHeight(200);
         mamaPortraitImageView.setFitWidth(200);
-        mamaPortraitImageView.setTranslateY(0);
+        mamaPortraitImageView.setTranslateY(-50);
         mamaPortraitImageView.setTranslateX(-100);
 
         textBubbleImageView.setFitHeight(250);
         textBubbleImageView.setFitWidth(1000);
-        textBubbleImageView.setTranslateY(0);
+        textBubbleImageView.setTranslateY(-50);
         textBubbleImageView.setTranslateX(250);
 
         mgsbackButtonImageView.setFitHeight(100);
         mgsbackButtonImageView.setFitWidth(200);
-        mgsbackButtonImageView.setTranslateY(-80);
+        mgsbackButtonImageView.setTranslateY(-130);
         mgsbackButtonImageView.setTranslateX(-400);
         mgsbackButtonImageView.setPreserveRatio(true);
 
@@ -1217,108 +1502,136 @@ public class Main extends Application {
         mamaPenguinImageView.setTranslateX(-400);
         mamaPenguinImageView.setPreserveRatio(true);
 
-        placeholderView1.setFitHeight(80);
-        placeholderView1.setFitWidth(80);
-        placeholderView1.setTranslateY(200);
-        placeholderView1.setTranslateX(0);
-        placeholderView1.setPreserveRatio(false);
+        iceCubeImageView.setFitHeight(75);
+        iceCubeImageView.setFitWidth(75);
+        iceCubeImageView.setTranslateY(565);
+        iceCubeImageView.setTranslateX(-450);
+        iceCubeImageView.setPreserveRatio(true);
 
-        defaultCardImageView1.setFitHeight(125);
-        defaultCardImageView1.setFitWidth(125);
-        defaultCardImageView1.setTranslateY(200);
-        defaultCardImageView1.setTranslateX(10);
-        defaultCardImageView1.setPreserveRatio(true);
+        mgsIceCubeTextHolder.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        mgsIceCubeTextHolder.setTranslateY(560);
+        mgsIceCubeTextHolder.setTranslateX(-400);
 
-        defaultCardImageView2.setFitHeight(125);
-        defaultCardImageView2.setFitWidth(125);
-        defaultCardImageView2.setTranslateY(325);
-        defaultCardImageView2.setTranslateX(10);
-        defaultCardImageView2.setPreserveRatio(true);
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth = mgsIceCubeTextHolder.getLayoutBounds().getWidth();
+        mgsIceCubeTextHolder.setWrappingWidth(initialWidth - 200);
 
-        defaultCardImageView3.setFitHeight(125);
-        defaultCardImageView3.setFitWidth(125);
-        defaultCardImageView3.setTranslateY(450);
-        defaultCardImageView3.setTranslateX(10);
-        defaultCardImageView3.setPreserveRatio(true);
+        mgsIceCubeTextHolder.setTranslateX(-510);
 
-        defaultCardImageView4.setFitHeight(125);
-        defaultCardImageView4.setFitWidth(125);
-        defaultCardImageView4.setTranslateY(575);
-        defaultCardImageView4.setTranslateX(10);
-        defaultCardImageView4.setPreserveRatio(true);
+        //creates a thread that constantly updates the text of gsIceCubeRunnable
+        IceCubeRunnable mgsIceCubeRunnable = new IceCubeRunnable(mgsIceCubeTextHolder);
+        Thread mgsThread = new Thread(mgsIceCubeRunnable);
+        mgsThread.start();
 
-        defaultCardImageView5.setFitHeight(125);
-        defaultCardImageView5.setFitWidth(125);
-        defaultCardImageView5.setTranslateY(200);
-        defaultCardImageView5.setTranslateX(135);
-        defaultCardImageView5.setPreserveRatio(true);
+//        placeholderView1.setFitHeight(80);
+//        placeholderView1.setFitWidth(80);
+//        placeholderView1.setTranslateY(200);
+//        placeholderView1.setTranslateX(0);
+//        placeholderView1.setPreserveRatio(false);
 
-        defaultCardImageView6.setFitHeight(125);
-        defaultCardImageView6.setFitWidth(125);
-        defaultCardImageView6.setTranslateY(325);
-        defaultCardImageView6.setTranslateX(135);
-        defaultCardImageView6.setPreserveRatio(true);
+        card1.setFitHeight(125);
+        card1.setFitWidth(125);
+        card1.setTranslateY(150);
+        card1.setTranslateX(10);
+        card1.setPreserveRatio(true);
 
-        defaultCardImageView7.setFitHeight(125);
-        defaultCardImageView7.setFitWidth(125);
-        defaultCardImageView7.setTranslateY(450);
-        defaultCardImageView7.setTranslateX(135);
-        defaultCardImageView7.setPreserveRatio(true);
+        card2.setFitHeight(125);
+        card2.setFitWidth(125);
+        card2.setTranslateY(275);
+        card2.setTranslateX(10);
+        card2.setPreserveRatio(true);
 
-        defaultCardImageView8.setFitHeight(125);
-        defaultCardImageView8.setFitWidth(125);
-        defaultCardImageView8.setTranslateY(575);
-        defaultCardImageView8.setTranslateX(135);
-        defaultCardImageView8.setPreserveRatio(true);
+        card3.setFitHeight(125);
+        card3.setFitWidth(125);
+        card3.setTranslateY(400);
+        card3.setTranslateX(10);
+        card3.setPreserveRatio(true);
 
-        defaultCardImageView9.setFitHeight(125);
-        defaultCardImageView9.setFitWidth(125);
-        defaultCardImageView9.setTranslateY(200);
-        defaultCardImageView9.setTranslateX(260);
-        defaultCardImageView9.setPreserveRatio(true);
+        card4.setFitHeight(125);
+        card4.setFitWidth(125);
+        card4.setTranslateY(525);
+        card4.setTranslateX(10);
+        card4.setPreserveRatio(true);
 
-        defaultCardImageView10.setFitHeight(125);
-        defaultCardImageView10.setFitWidth(125);
-        defaultCardImageView10.setTranslateY(325);
-        defaultCardImageView10.setTranslateX(260);
-        defaultCardImageView10.setPreserveRatio(true);
+        card5.setFitHeight(125);
+        card5.setFitWidth(125);
+        card5.setTranslateY(150);
+        card5.setTranslateX(135);
+        card5.setPreserveRatio(true);
 
-        defaultCardImageView11.setFitHeight(125);
-        defaultCardImageView11.setFitWidth(125);
-        defaultCardImageView11.setTranslateY(450);
-        defaultCardImageView11.setTranslateX(260);
-        defaultCardImageView11.setPreserveRatio(true);
+        card6.setFitHeight(125);
+        card6.setFitWidth(125);
+        card6.setTranslateY(275);
+        card6.setTranslateX(135);
+        card6.setPreserveRatio(true);
 
-        defaultCardImageView12.setFitHeight(125);
-        defaultCardImageView12.setFitWidth(125);
-        defaultCardImageView12.setTranslateY(575);
-        defaultCardImageView12.setTranslateX(260);
-        defaultCardImageView12.setPreserveRatio(true);
+        card7.setFitHeight(125);
+        card7.setFitWidth(125);
+        card7.setTranslateY(400);
+        card7.setTranslateX(135);
+        card7.setPreserveRatio(true);
 
-        defaultCardImageView13.setFitHeight(125);
-        defaultCardImageView13.setFitWidth(125);
-        defaultCardImageView13.setTranslateY(200);
-        defaultCardImageView13.setTranslateX(385);
-        defaultCardImageView13.setPreserveRatio(true);
+        card8.setFitHeight(125);
+        card8.setFitWidth(125);
+        card8.setTranslateY(525);
+        card8.setTranslateX(135);
+        card8.setPreserveRatio(true);
 
-        defaultCardImageView14.setFitHeight(125);
-        defaultCardImageView14.setFitWidth(125);
-        defaultCardImageView14.setTranslateY(325);
-        defaultCardImageView14.setTranslateX(385);
-        defaultCardImageView14.setPreserveRatio(true);
+        card9.setFitHeight(125);
+        card9.setFitWidth(125);
+        card9.setTranslateY(150);
+        card9.setTranslateX(260);
+        card9.setPreserveRatio(true);
 
-        defaultCardImageView15.setFitHeight(125);
-        defaultCardImageView15.setFitWidth(125);
-        defaultCardImageView15.setTranslateY(450);
-        defaultCardImageView15.setTranslateX(385);
-        defaultCardImageView15.setPreserveRatio(true);
+        card10.setFitHeight(125);
+        card10.setFitWidth(125);
+        card10.setTranslateY(275);
+        card10.setTranslateX(260);
+        card10.setPreserveRatio(true);
 
-        defaultCardImageView16.setFitHeight(125);
-        defaultCardImageView16.setFitWidth(125);
-        defaultCardImageView16.setTranslateY(575);
-        defaultCardImageView16.setTranslateX(385);
-        defaultCardImageView16.setPreserveRatio(true);
+        card11.setFitHeight(125);
+        card11.setFitWidth(125);
+        card11.setTranslateY(400);
+        card11.setTranslateX(260);
+        card11.setPreserveRatio(true);
 
+        card12.setFitHeight(125);
+        card12.setFitWidth(125);
+        card12.setTranslateY(525);
+        card12.setTranslateX(260);
+        card12.setPreserveRatio(true);
+
+        card13.setFitHeight(125);
+        card13.setFitWidth(125);
+        card13.setTranslateY(150);
+        card13.setTranslateX(385);
+        card13.setPreserveRatio(true);
+
+        card14.setFitHeight(125);
+        card14.setFitWidth(125);
+        card14.setTranslateY(275);
+        card14.setTranslateX(385);
+        card14.setPreserveRatio(true);
+
+        card15.setFitHeight(125);
+        card15.setFitWidth(125);
+        card15.setTranslateY(400);
+        card15.setTranslateX(385);
+        card15.setPreserveRatio(true);
+
+        card16.setFitHeight(125);
+        card16.setFitWidth(125);
+        card16.setTranslateY(525);
+        card16.setTranslateX(385);
+        card16.setPreserveRatio(true);
+
+        for (int i = 0; i < cardArr.size(); i++)
+        {
+            cardArr.get(i).setOnMouseClicked(mouseEvent ->
+            {
+
+            });
+        }
 
 
 
@@ -1418,13 +1731,195 @@ public class Main extends Application {
 
         buyButtonView.setOnMouseClicked(mouseEvent ->
         {
+            if(iceCubes>=100)
+            {
+                iceCubes-=100;
+                int ranNum=lottery();
+                System.out.print(ranNum);
+                if(ranNum==4)
+                {
+                    int ran = getRandomNumber(1,2);
+                    if(ran==1)
+                    {
+                        pullName="neo";
+                    }
+                    pullName="pop";
+                }
+                else if (ranNum==3) {
+                    int ran = getRandomNumber(1,2);
+                    if(ran==1)
+                    {
+                        pullName="rock";
+                    }
+                    pullName="sax";
+                }
+                else if (ranNum==2) {
+                    int ran = getRandomNumber(1, 2);
+                    if (ran == 1) {
+                        pullName = "cyb";
+                    }
+                    pullName = "king";
+                }
+                else if (ranNum==1) {
+                    int ran = getRandomNumber(1, 2);
+                    if (ran == 1) {
+                        pullName = "tux";
+                    }
+                    pullName = "astro";
+                }
+                openPullScene();
+            }
+            else
+            {
+                shopText.setText("Silly Goose! You don't have enough.");
+            }
 
         });
 
     }
 
-    public void setPullScene()
+    public void setPullScene() throws FileNotFoundException
     {
+//        Image tuxPenguinImage = new Image(new FileInputStream("src/Sprites/tuxPenguinPlush.png"));
+//        ImageView tuxPenguinImageView = new ImageView(tuxPenguinImage);
+//        Image astronautPenguinImage = new Image(new FileInputStream("src/Sprites/astronautPenguinPlush.png"));
+//        ImageView astronautPenguinImageView = new ImageView(astronautPenguinImage);
+//        Image cyborgPenguinImage = new Image(new FileInputStream("src/Sprites/cyborgPenguinPlush.png"));
+//        ImageView cyborgPenguinImageView = new ImageView(cyborgPenguinImage);
+//        Image kingPenguinImage = new Image(new FileInputStream("src/Sprites/kingPenguinPlush.png"));
+//        ImageView kingPenguinImageView = new ImageView(kingPenguinImage);
+//        Image rockStarPenguinImage = new Image(new FileInputStream("src/Sprites/rockStarPenguinPlush.png"));
+//        ImageView rockStarPenguinImageView = new ImageView(rockStarPenguinImage);
+//        Image saxophonePenguinImage = new Image(new FileInputStream("src/Sprites/saxophonePenguinPlush.png"));
+//        ImageView saxophonePenguinImageView = new ImageView(saxophonePenguinImage);
+//        Image neoSamuraiPenguinImage = new Image(new FileInputStream("src/Sprites/neoSamuraiPenguinPlush.png"));
+//        ImageView neoSamuraiPenguinImageView = new ImageView(neoSamuraiPenguinImage);
+//        Image popStarPenguinImage = new Image(new FileInputStream("src/Sprites/popStarPenguinPlush.png"));
+//        ImageView popStarPenguinImageView = new ImageView(popStarPenguinImage);
+        Image sgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
+        ImageView sgsbackButtonImageView = new ImageView(sgsbackButtonImage);
+
+        //moved to start() method
+//        Text pulltext = new Text("What did you get?");
+
+        //moved to openPullScene() method
+//        if(pullName=="neo")
+//        {
+//            pullPane.getChildren().add(neoSamuraiPenguinImageView);
+//            pulltext.setText("You got a NEOSAMURAIPENGUINPLUSH");
+//        }
+//        if(pullName=="rock")
+//        {
+//            pullPane.getChildren().add(rockStarPenguinImageView);
+//            pulltext.setText("You got a ROCKSTARPENGUINPLUSH");
+//        }
+//        if(pullName=="astro")
+//        {
+//            pullPane.getChildren().add(astronautPenguinImageView);
+//            pulltext.setText("You got a ASTRONAUTPENGUINPLUSH");
+//        }
+//        if(pullName=="cyb")
+//        {
+//            pullPane.getChildren().add(cyborgPenguinImageView);
+//            pulltext.setText("You got a CYBORGPENGUINPLUSH");
+//        }
+//        if(pullName=="pop")
+//        {
+//            pullPane.getChildren().add(cyborgPenguinImageView);
+//            pulltext.setText("You got a POPSTARPENGUINPLUSH");
+//        }
+//        if(pullName=="tux")
+//        {
+//            pullPane.getChildren().add(tuxPenguinImageView);
+//            pulltext.setText("You got a TUXPENGUINPLUSH");
+//        }
+//        if(pullName=="sax")
+//        {
+//            pullPane.getChildren().add(saxophonePenguinImageView);
+//            pulltext.setText("You got a SAXOPHONEPENGUINPLUSH");
+//        }
+//
+//        if(pullName=="king")
+//        {
+//            pullPane.getChildren().add(kingPenguinImageView);
+//            pulltext.setText("You got a KINGPENGUINPLUSH");
+//        }
+
+        //moved to start() method
+//        pulltext.setTranslateY(0);
+//        pulltext.setTranslateX(350);
+//
+//        pulltext.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+
+
+        mainGroup.getChildren().add(pullPane);
+        pullPane.getChildren().addAll(sgsbackButtonImageView);
+        pullPane.getChildren().add(pulltext);
+
+        //moved to start() method
+//        popStarPenguinImageView.setFitWidth(600);
+//        popStarPenguinImageView.setFitHeight(600);
+//        popStarPenguinImageView.setTranslateX(450);
+//        popStarPenguinImageView.setTranslateY(200);
+//        popStarPenguinImageView.setPreserveRatio(true);
+//
+//        tuxPenguinImageView.setFitWidth(600);
+//        tuxPenguinImageView.setFitHeight(600);
+//        tuxPenguinImageView.setTranslateX(450);
+//        tuxPenguinImageView.setTranslateY(200);
+//        tuxPenguinImageView.setPreserveRatio(true);
+//
+//        kingPenguinImageView.setFitWidth(600);
+//        kingPenguinImageView.setFitHeight(600);
+//        kingPenguinImageView.setTranslateX(450);
+//        kingPenguinImageView.setTranslateY(200);
+//        kingPenguinImageView.setPreserveRatio(true);
+//
+//        rockStarPenguinImageView.setFitWidth(600);
+//        rockStarPenguinImageView.setFitHeight(600);
+//        rockStarPenguinImageView.setTranslateX(450);
+//        rockStarPenguinImageView.setTranslateY(200);
+//        rockStarPenguinImageView.setPreserveRatio(true);
+//
+//        neoSamuraiPenguinImageView.setFitWidth(600);
+//        neoSamuraiPenguinImageView.setFitHeight(600);
+//        neoSamuraiPenguinImageView.setTranslateX(450);
+//        neoSamuraiPenguinImageView.setTranslateY(200);
+//        neoSamuraiPenguinImageView.setPreserveRatio(true);
+//
+//        astronautPenguinImageView.setFitWidth(600);
+//        astronautPenguinImageView.setFitHeight(600);
+//        astronautPenguinImageView.setTranslateX(450);
+//        astronautPenguinImageView.setTranslateY(200);
+//        astronautPenguinImageView.setPreserveRatio(true);
+//
+//        saxophonePenguinImageView.setFitWidth(600);
+//        saxophonePenguinImageView.setFitHeight(600);
+//        saxophonePenguinImageView.setTranslateX(450);
+//        saxophonePenguinImageView.setTranslateY(200);
+//        saxophonePenguinImageView.setPreserveRatio(true);
+//
+//        cyborgPenguinImageView.setFitWidth(600);
+//        cyborgPenguinImageView.setFitHeight(600);
+//        cyborgPenguinImageView.setTranslateX(450);
+//        cyborgPenguinImageView.setTranslateY(200);
+//        cyborgPenguinImageView.setPreserveRatio(true);
+
+        sgsbackButtonImageView.setFitHeight(100);
+        sgsbackButtonImageView.setFitWidth(200);
+        sgsbackButtonImageView.setTranslateY(-250);
+        sgsbackButtonImageView.setTranslateX(-275);
+        sgsbackButtonImageView.setPreserveRatio(true);
+//
+        sgsbackButtonImageView.setOnMousePressed(event->{
+
+            pullPane.getChildren().removeAll(popStarPenguinImageView,tuxPenguinImageView,cyborgPenguinImageView,astronautPenguinImageView,kingPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,neoSamuraiPenguinImageView);
+            System.out.println("closing shopScene and opening gameScene");
+            openGameScene();
+        });
+
+
+
 
     }
 
@@ -1610,6 +2105,16 @@ public class Main extends Application {
             openShopScene();
             updateIsSceneVariables("shopScene");
         }
+        else if (previousScene.equals("pullScene"))
+        {
+            openPullScene();
+            updateIsSceneVariables("pullScene");
+        }
+        else if (previousScene.equals("inventoryScene"))
+        {
+            openInventoryScene();
+            updateIsSceneVariables("inventoryScene");
+        }
 
     }
     //opens Game Scene and closes other scenes
@@ -1619,6 +2124,8 @@ public class Main extends Application {
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
         mainGroup.getChildren().remove(mamaGamePane);
         mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(gamePane);
@@ -1630,6 +2137,8 @@ public class Main extends Application {
         mainGroup.getChildren().remove(gamePane);
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(babyGamePane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
         mainGroup.getChildren().remove(shopPane);
@@ -1642,6 +2151,8 @@ public class Main extends Application {
         mainGroup.getChildren().remove(mainPane);
         mainGroup.getChildren().remove(gamePane);
         mainGroup.getChildren().remove(babyGamePane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
         mainGroup.getChildren().remove(shopPane);
@@ -1653,6 +2164,8 @@ public class Main extends Application {
     {
         mainGroup.getChildren().remove(mainPane);
         mainGroup.getChildren().remove(gamePane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
@@ -1669,6 +2182,8 @@ public class Main extends Application {
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
         mainGroup.getChildren().remove(shopPane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
         mainGroup.getChildren().add(papaGamePane);
         updateIsSceneVariables("papaGameScene"); //updates current scene to papaGameScene because papaGameScene is currently opened
     }
@@ -1681,6 +2196,8 @@ public class Main extends Application {
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(shopPane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
         mainGroup.getChildren().add(mamaGamePane);
         updateIsSceneVariables("mamaGameScene"); //updates current scene to mamaGameScene because mamaGameScene is currently opened
     }
@@ -1692,9 +2209,98 @@ public class Main extends Application {
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
         mainGroup.getChildren().add(shopPane);
         updateIsSceneVariables("shopScene"); //updates current scene to shopScene because shopScene is currently opened
     }
+
+    public void openPullScene()
+    {
+        mainGroup.getChildren().remove(mainPane);
+        mainGroup.getChildren().remove(gamePane);
+        mainGroup.getChildren().remove(settingsPane);
+        mainGroup.getChildren().remove(babyGamePane);
+        mainGroup.getChildren().remove(papaGamePane);
+        mainGroup.getChildren().remove(shopPane);
+        mainGroup.getChildren().remove(inventoryPane);
+        mainGroup.getChildren().add(pullPane);
+        updateIsSceneVariables("pullScene"); //updates current scene to shopScene because shopScene is currently opened
+
+        System.out.println(pullName);
+        if(pullName=="neo")
+        {
+            pullPane.getChildren().add(neoSamuraiPenguinImageView);
+            pulltext.setText("You got a NEOSAMURAIPENGUINPLUSH");
+        }
+        if(pullName=="rock")
+        {
+            pullPane.getChildren().add(rockStarPenguinImageView);
+            pulltext.setText("You got a ROCKSTARPENGUINPLUSH");
+        }
+        if(pullName=="astro")
+        {
+            pullPane.getChildren().add(astronautPenguinImageView);
+            pulltext.setText("You got a ASTRONAUTPENGUINPLUSH");
+        }
+        if(pullName=="cyb")
+        {
+            pullPane.getChildren().add(cyborgPenguinImageView);
+            pulltext.setText("You got a CYBORGPENGUINPLUSH");
+        }
+        if(pullName=="pop")
+        {
+            pullPane.getChildren().add(cyborgPenguinImageView);
+            pulltext.setText("You got a POPSTARPENGUINPLUSH");
+        }
+        if(pullName=="tux")
+        {
+            pullPane.getChildren().add(tuxPenguinImageView);
+            pulltext.setText("You got a TUXPENGUINPLUSH");
+        }
+        if(pullName=="sax")
+        {
+            pullPane.getChildren().add(saxophonePenguinImageView);
+            pulltext.setText("You got a SAXOPHONEPENGUINPLUSH");
+        }
+
+        if(pullName=="king")
+        {
+            pullPane.getChildren().add(kingPenguinImageView);
+            pulltext.setText("You got a KINGPENGUINPLUSH");
+        }
+
+//        pulltext.setTranslateY(0);
+//        pulltext.setTranslateX(350);
+//
+//        pulltext.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+//
+//
+//        mainGroup.getChildren().add(pullPane);
+//        pullPane.getChildren().addAll(sgsbackButtonImageView);
+//        pullPane.getChildren().add(pulltext);
+
+//        popStarPenguinImageView.setFitWidth(600);
+//        popStarPenguinImageView.setFitHeight(600);
+//        popStarPenguinImageView.setTranslateX(450);
+//        popStarPenguinImageView.setTranslateY(200);
+//        popStarPenguinImageView.setPreserveRatio(true);
+
+    }
+
+    public void openInventoryScene()
+    {
+        mainGroup.getChildren().remove(mainPane);
+        mainGroup.getChildren().remove(gamePane);
+        mainGroup.getChildren().remove(settingsPane);
+        mainGroup.getChildren().remove(babyGamePane);
+        mainGroup.getChildren().remove(papaGamePane);
+        mainGroup.getChildren().add(shopPane);
+        mainGroup.getChildren().add(inventoryPane);
+        mainGroup.getChildren().remove(pullPane);
+        updateIsSceneVariables("inventoryScene"); //updates current scene to shopScene because shopScene is currently opened
+    }
+
 //
 //    public void backMain()
 //    {
@@ -1739,7 +2345,7 @@ public class Main extends Application {
     }
 
     //generates random number from min to max
-    public int getRandomNumber(int min, int max) {
+    public static int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
@@ -1815,6 +2421,28 @@ public class Main extends Application {
     public static void setIceCubes(int num)
     {
         iceCubes = num;
+    }
+
+    public static int lottery()
+    {
+        ArrayList<Integer>blank=new ArrayList<>();
+        for(int a=0;a<1000;a++)
+        {
+            blank.add(1);
+        }
+        for(int b=0;b<100;b++)
+        {
+            blank.add(2);
+        }
+        for(int c=0;c<10;c++)
+        {
+            blank.add(3);
+        }
+        for(int d=0;d<1;d++)
+        {
+            blank.add(4);
+        }
+        return blank.get(getRandomNumber(0,blank.toArray().length));
     }
 
 

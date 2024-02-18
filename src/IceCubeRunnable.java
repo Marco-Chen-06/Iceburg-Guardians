@@ -19,7 +19,7 @@ public class IceCubeRunnable implements Runnable
 //            System.out.println(iceCubeTextHolder);
 //            System.out.println("i am running on " + i + " iteration");
             try {
-                Thread.sleep(50);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

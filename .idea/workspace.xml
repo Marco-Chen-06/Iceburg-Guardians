@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99944dbe-639a-437e-ab7b-350d1a7900b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Effects/confetti2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/buyButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/enterCode.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/inventory.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/popStarPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/rockStarPenguinPlush.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IceCubeRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IceCubeRunnable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,10 +53,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Sprites" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Shop" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Effects" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\MatchingGame" />
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Sprites" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Bonus" />
     </key>
   </component>
@@ -141,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708289159352</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fully completed quiz minigame and began shop">
+      <created>1708293982376</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708293982376</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -162,7 +173,8 @@
     <MESSAGE value="Added fishing minigame and shop" />
     <MESSAGE value="Completely finished fishing minigame" />
     <MESSAGE value="began development of quiz minigame" />
-    <option name="LAST_COMMIT_MESSAGE" value="began development of quiz minigame" />
+    <MESSAGE value="fully completed quiz minigame and began shop" />
+    <option name="LAST_COMMIT_MESSAGE" value="fully completed quiz minigame and began shop" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
