@@ -1,3 +1,5 @@
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -15,6 +17,11 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -23,6 +30,7 @@ import java.util.ArrayList;
 
 public class Main extends Application {
     private static int speechIndex;
+    private static int fishingSpeechIndex=0;
     boolean escPressed=false;
     boolean isMainScene=false;
     boolean isGameScene=false;
@@ -30,6 +38,14 @@ public class Main extends Application {
     boolean isBabyGameScene=false;
     boolean isPapaGameScene=false;
     boolean isMamaGameScene=false;
+    boolean isShopScene=false;
+    boolean itemInLake=false;
+    boolean isCompost=false;
+    boolean isLandfill=false;
+    boolean isPlastic=false;
+    boolean isBonus=false;
+    int fishingCategoryGacha=-1;
+    int fishingItemGacha=-1;
     String previousScene = ""; //Refers to the previous scene, only used for going back correctly with the setting screen
     Group textGroup = new Group();
     private static Audio activeClip = null;
@@ -43,6 +59,7 @@ public class Main extends Application {
     StackPane babyGamePane = new StackPane();
     StackPane papaGamePane = new StackPane();
     StackPane mamaGamePane = new StackPane();
+    StackPane shopPane = new StackPane();
     Group mainGroup = new Group();
     Scene mainScene = new Scene(mainGroup,SCENE_WIDTH,SCENE_HEIGHT,true, SceneAntialiasing.BALANCED);
     private static final String PENGUIN_ICON_PATH = "/penguinIcon.png";
@@ -82,6 +99,17 @@ public class Main extends Application {
 
     String[] speechArr = {speech1,speech2,speech3,speech4,speech5,speech6};
 
+
+    String fishingSpeech1="Hi there! We need to fish for food!";
+    String fishingSpeech2="However, sometimes we pick up garbage.";
+    String fishingSpeech3="Can you help us sort out between compost, plastic, and landfill? ";
+    String fishingSpeech4="Mama is in charge of plastic.";
+    String fishingSpeech5="Baby is in charge of paper";
+    String fishingSpeech6="....and I'm in charge of compost!";
+    String fishingSpeech7="Click the pond to fish!";
+
+    String[] fishingSpeechArr = {fishingSpeech1,fishingSpeech2,fishingSpeech3,fishingSpeech4,fishingSpeech5,fishingSpeech6,fishingSpeech7};
+
     public static void main(String[] args)
     {
 //        Windows windows = new Windows();
@@ -108,8 +136,10 @@ public class Main extends Application {
         mainGroup.getChildren().remove(papaGamePane);
         setMamaGameScene();
         mainGroup.getChildren().remove(mamaGamePane);
-        playBackground();
+        setShopScene();
+        mainGroup.getChildren().remove(shopPane);
 
+        playBackground();
     }
     public void setMainScene() throws FileNotFoundException
     {
@@ -301,11 +331,11 @@ public class Main extends Application {
         shopImageView.setPreserveRatio(true);
 
 
-
         gameSpeech.setTranslateY(-100);
         gameSpeech.setTranslateX(350);
 
         gameSpeech.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
 
         gsbackButtonImageView.setOnMouseClicked(mouseEvent ->
         {
@@ -445,6 +475,12 @@ public class Main extends Application {
                 }
         );
 
+        shopImageView.setOnMouseClicked(mouseEvent ->
+                {
+                    System.out.println("opening shopScene");
+                    openShopScene();
+                });
+
 
 
 
@@ -540,16 +576,26 @@ public class Main extends Application {
         ImageView papaPenguinImageView = new ImageView(papaPenguinImage);
         Image mamaPenguinImage = new Image(new FileInputStream("src/Sprites/mamaPenguin.png"));
         ImageView mamaPenguinImageView = new ImageView(mamaPenguinImage);
-        Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/babyPenguin.png"));
+        Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/cleanbabyPenguin.png"));
         ImageView babyPenguinImageView = new ImageView(babyPenguinImage);
+        Image textBubbleImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView textBubbleImageView = new ImageView(textBubbleImage);
+        Image babyPortraitImage = new Image(new FileInputStream("src/Sprites/babyPortrait.png"));
+        ImageView babyPortraitImageView = new ImageView(babyPortraitImage);
+
 
         mainGroup.getChildren().add(babyGamePane);
-        babyGamePane.getChildren().addAll(bgsbackButtonImageView, babyPenguinImageView);
+        babyGamePane.getChildren().addAll(bgsbackButtonImageView, babyPenguinImageView,textBubbleImageView,babyPortraitImageView);
+
+        textBubbleImageView.setFitHeight(250);
+        textBubbleImageView.setFitWidth(1000);
+        textBubbleImageView.setTranslateY(0);
+        textBubbleImageView.setTranslateX(250);
 
         bgsbackButtonImageView.setFitHeight(100);
         bgsbackButtonImageView.setFitWidth(200);
-        bgsbackButtonImageView.setTranslateY(0);
-        bgsbackButtonImageView.setTranslateX(0);
+        bgsbackButtonImageView.setTranslateY(-80);
+        bgsbackButtonImageView.setTranslateX(-400);
         bgsbackButtonImageView.setPreserveRatio(true);
 
         babyPenguinImageView.setFitHeight(150);
@@ -557,6 +603,11 @@ public class Main extends Application {
         babyPenguinImageView.setTranslateY(300);
         babyPenguinImageView.setTranslateX(200);
         babyPenguinImageView.setPreserveRatio(true);
+
+        babyPortraitImageView.setFitHeight(200);
+        babyPortraitImageView.setFitWidth(200);
+        babyPortraitImageView.setTranslateY(0);
+        babyPortraitImageView.setTranslateX(-100);
 
         System.out.println("hello");
 
@@ -571,33 +622,312 @@ public class Main extends Application {
     {
         Image pgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
         ImageView pgsbackButtonImageView = new ImageView(pgsbackButtonImage);
-        Image papaPenguinImage = new Image(new FileInputStream("src/Sprites/papaPenguin.png"));
+        Image papaPenguinImage = new Image(new FileInputStream("src/Sprites/cleanpapaPenguin.png"));
         ImageView papaPenguinImageView = new ImageView(papaPenguinImage);
-        Image mamaPenguinImage = new Image(new FileInputStream("src/Sprites/mamaPenguin.png"));
+        Image mamaPenguinImage = new Image(new FileInputStream("src/Sprites/cleanmamaPenguin.png"));
         ImageView mamaPenguinImageView = new ImageView(mamaPenguinImage);
-        Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/babyPenguin.png"));
+        Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/cleanbabyPenguin.png"));
         ImageView babyPenguinImageView = new ImageView(babyPenguinImage);
+        Image fishingpondImage = new Image(new FileInputStream("src/Sprites/fishingPond.png"));
+        ImageView fishingpondImageView = new ImageView(fishingpondImage);
+        Image textBubbleImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView textBubbleImageView = new ImageView(textBubbleImage);
+        Image papaPortraitImage = new Image(new FileInputStream("src/Sprites/papaPortrait.png"));
+        ImageView papaPortraitImageView = new ImageView(papaPortraitImage);
+        Image leftArrowImage = new Image(new FileInputStream("src/Sprites/leftArrow.png"));
+        ImageView leftArrowImageView = new ImageView(leftArrowImage);
+        Image rightArrowImage = new Image(new FileInputStream("src/Sprites/rightArrow.png"));
+        ImageView rightArrowImageView = new ImageView(rightArrowImage);
+        Image shopImage = new Image(new FileInputStream("src/Sprites/shop.png"));
+
+        Image appleImage = new Image(new FileInputStream("src/MinigameSprites/Compost/apple.png"));
+        Image bananaImage = new Image(new FileInputStream("src/MinigameSprites/Compost/banana.png"));
+        Image cardboardImage = new Image(new FileInputStream("src/MinigameSprites/Landfill/cardboard.png"));
+        Image newspaperImage = new Image(new FileInputStream("src/MinigameSprites/Landfill/newspaper.png"));
+        Image milkImage = new Image(new FileInputStream("src/MinigameSprites/Plastic/milk.png"));
+        Image waterBottleImage = new Image(new FileInputStream("src/MinigameSprites/Plastic/waterBottle.png"));
+        Image fishImage = new Image(new FileInputStream("src/MinigameSprites/Bonus/fish.png"));
+        Image krillImage = new Image(new FileInputStream("src/MinigameSprites/Bonus/krill.png"));
+        Image confettiGIF = new Image(new FileInputStream("src/Effects/confetti.gif"));
+        ImageView confettiGIFImageView = new ImageView(confettiGIF);
+
+        Image[] compostArr = {appleImage, bananaImage};
+        Image[] landfillArr = {cardboardImage, newspaperImage};
+        Image[] plasticArr = {milkImage, waterBottleImage};
+        Image[] bonusArr = {fishImage, krillImage};
+
+        Image[][] fishingItemArr = {compostArr, landfillArr, plasticArr, bonusArr};
+
+        ImageView fishingItemImageView = new ImageView(appleImage);
+
+        fishingItemImageView.setFitHeight(175);
+        fishingItemImageView.setFitWidth(175);
+        fishingItemImageView.setTranslateY(-2000);
+        fishingItemImageView.setTranslateX(-2000);
+        fishingItemImageView.setPreserveRatio(true);
+
+        //hides the confetti initially
+        //the real translate values are in the startConfettiAnimation() method
+        confettiGIFImageView.setTranslateY(-2000);
+        confettiGIFImageView.setTranslateX(-2000);
+        confettiGIFImageView.setFitHeight(350);
+        confettiGIFImageView.setFitWidth(500);
+
+
+        Text gameSpeech = new Text(fishingSpeech1);
+        Text compostText = new Text("Compost");
+        Text paperText = new Text("Landfill");
+        Text plasticText = new Text("Plastic");
 
         mainGroup.getChildren().add(papaGamePane);
-        papaGamePane.getChildren().addAll(pgsbackButtonImageView, papaPenguinImageView);
+        papaGamePane.getChildren().addAll(pgsbackButtonImageView, papaPenguinImageView,mamaPenguinImageView,babyPenguinImageView,fishingpondImageView,textBubbleImageView,papaPortraitImageView,leftArrowImageView,rightArrowImageView, fishingItemImageView, confettiGIFImageView);
+        papaGamePane.getChildren().addAll(gameSpeech,compostText,paperText,plasticText);
 
         pgsbackButtonImageView.setFitHeight(100);
         pgsbackButtonImageView.setFitWidth(200);
-        pgsbackButtonImageView.setTranslateY(0);
-        pgsbackButtonImageView.setTranslateX(0);
+        pgsbackButtonImageView.setTranslateY(-200);
+        pgsbackButtonImageView.setTranslateX(-400);
         pgsbackButtonImageView.setPreserveRatio(true);
+
+        papaPortraitImageView.setFitHeight(200);
+        papaPortraitImageView.setFitWidth(200);
+        papaPortraitImageView.setTranslateY(-100);
+        papaPortraitImageView.setTranslateX(-100);
+
+        textBubbleImageView.setFitHeight(250);
+        textBubbleImageView.setFitWidth(1000);
+        textBubbleImageView.setTranslateY(-100);
+        textBubbleImageView.setTranslateX(250);
 
         papaPenguinImageView.setFitHeight(150);
         papaPenguinImageView.setFitWidth(150);
-        papaPenguinImageView.setTranslateY(300);
-        papaPenguinImageView.setTranslateX(200);
+        papaPenguinImageView.setTranslateY(400);
+        papaPenguinImageView.setTranslateX(700);
         papaPenguinImageView.setPreserveRatio(true);
+
+        mamaPenguinImageView.setFitHeight(150);
+        mamaPenguinImageView.setFitWidth(150);
+        mamaPenguinImageView.setTranslateY(400);
+        mamaPenguinImageView.setTranslateX(-200);
+        mamaPenguinImageView.setPreserveRatio(true);
+
+        babyPenguinImageView.setFitHeight(130);
+        babyPenguinImageView.setFitWidth(130);
+        babyPenguinImageView.setTranslateY(200);
+        babyPenguinImageView.setTranslateX(-180);
+        babyPenguinImageView.setPreserveRatio(true);
+
+        fishingpondImageView.setFitHeight(500);
+        fishingpondImageView.setFitWidth(1000);
+        fishingpondImageView.setTranslateY(300);
+        fishingpondImageView.setTranslateX(250);
+        fishingpondImageView.setPreserveRatio(true);
+
+        leftArrowImageView.setFitHeight(60);
+        leftArrowImageView.setFitWidth(60);
+        leftArrowImageView.setTranslateY(-30);
+        leftArrowImageView.setTranslateX(640);
+        leftArrowImageView.setPreserveRatio(true);
+
+        rightArrowImageView.setFitHeight(60);
+        rightArrowImageView.setFitWidth(60);
+        rightArrowImageView.setTranslateY(-30);
+        rightArrowImageView.setTranslateX(700);
+        rightArrowImageView.setPreserveRatio(true);
+
+
+
+        gameSpeech.setTranslateY(-100);
+        gameSpeech.setTranslateX(300);
+
+        compostText.setTranslateY(320);
+        compostText.setTranslateX(700);
+
+        paperText.setTranslateY(140);
+        paperText.setTranslateX(-180);
+
+        plasticText.setTranslateY(325);
+        plasticText.setTranslateX(-200);
+
+
+
+        gameSpeech.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        compostText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        paperText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        plasticText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
+        rightArrowImageView.setOnMouseClicked(mouseEvent ->
+                {
+                    if(fishingSpeechIndex < fishingSpeechArr.length-1)
+                    {
+                        fishingSpeechIndex++;
+                        gameSpeech.setText(fishingSpeechArr[fishingSpeechIndex]);
+                    }
+//                    else if (fishingSpeechIndex == fishingSpeechArr.length-1)
+//                    {
+//                        System.out.println("reached end of text");
+//                        if (babySpeaking)
+//                        {
+//                            System.out.println("opening babyGameScene");
+//                            openBabyGameScene();
+//                        }
+//                        else if (papaSpeaking)
+//                        {
+//                            System.out.println("opening papaGameScene");
+//                            openPapaGameScene();
+//                        }
+//                        else if (mamaSpeaking)
+//                        {
+//                            System.out.println("opening mamaGameScene");
+//                            openMamaGameScene();
+//                        }
+//                    }
+                }
+        );
+
+        leftArrowImageView.setOnMouseClicked(mouseEvent ->
+                {
+                    if(fishingSpeechIndex>0)
+                    {
+                        fishingSpeechIndex--;
+                        gameSpeech.setText(fishingSpeechArr[fishingSpeechIndex]);
+                    }
+                }
+        );
+
+
 
         pgsbackButtonImageView.setOnMouseClicked(mouseEvent ->
         {
             System.out.println("closing papaGameScene and opening GameScene");
             openGameScene();
             //backGame();
+        });
+
+        fishingpondImageView.setOnMouseClicked(mouseEvent ->
+        {
+            if (!(itemInLake)) {
+                itemInLake = true;
+                fishingCategoryGacha = getRandomNumber(0, 4); //generates number from 0 to 3
+                fishingItemGacha = getRandomNumber(0, 2); //generates number from 0 to 2
+                if (fishingCategoryGacha == 0) //refers to compostArr
+                {
+                    isCompost = true;
+                    isLandfill = false;
+                    isPlastic = false;
+                    isBonus = false;
+                }
+                else if (fishingCategoryGacha == 1) //refers to landfillArr
+                {
+                    isCompost = false;
+                    isLandfill = true;
+                    isPlastic = false;
+                    isBonus = false;
+                }
+                else if (fishingCategoryGacha == 2) //refers to plasticArr
+                {
+                    isCompost = false;
+                    isLandfill = false;
+                    isPlastic = true;
+                    isBonus = false;
+                }
+                else if (fishingCategoryGacha == 3) //refers to bonusArr
+                {
+                    isCompost = false;
+                    isLandfill = false;
+                    isPlastic = false;
+                    isBonus = true;
+                }
+                fishingItemImageView.setImage(fishingItemArr[fishingCategoryGacha][fishingItemGacha]);
+//            fishingItemImageView.setImage()
+                fishingItemImageView.setFitHeight(160);
+                fishingItemImageView.setFitWidth(175);
+                fishingItemImageView.setTranslateY(250);
+                fishingItemImageView.setTranslateX(260);
+                fishingItemImageView.setPreserveRatio(true);
+            }
+        });
+
+        babyPenguinImageView.setOnMouseClicked(mouseEvent ->
+        {
+            if (isLandfill)
+            {
+                System.out.println("landfill correct");
+                startFishingConfettiAnimation(confettiGIFImageView);
+//                confettiGIFImageView.setTranslateX(250);
+//                confettiGIFImageView.setTranslateY(260);
+            }
+            else if (isBonus)
+            {
+                System.out.println("was bonus, very good");
+                startFishingConfettiAnimation(confettiGIFImageView);
+//                confettiGIFImageView.setTranslateX(250);
+//                confettiGIFImageView.setTranslateY(260);
+            }
+            else
+            {
+                System.out.println("not bonus or landfill");
+//                confettiGIFImageView.setTranslateX(-2000);
+//                confettiGIFImageView.setTranslateY(-2000);
+            }
+            fishingItemImageView.setTranslateY(-2000);
+            fishingItemImageView.setTranslateX(-2000);
+            isCompost = false;
+            isLandfill = false;
+            isPlastic = false;
+            isBonus = false;
+            itemInLake = false;
+        });
+
+        mamaPenguinImageView.setOnMouseClicked(mouseEvent ->
+        {
+            if (isPlastic)
+            {
+                System.out.println("compost correct");
+                startFishingConfettiAnimation(confettiGIFImageView);
+            }
+            else if (isBonus)
+            {
+                System.out.println("was bonus, very good");
+                startFishingConfettiAnimation(confettiGIFImageView);
+            }
+            else
+            {
+                System.out.println("not bonus or, it was not compost");
+            }
+            fishingItemImageView.setTranslateY(-2000);
+            fishingItemImageView.setTranslateX(-2000);
+            isCompost = false;
+            isLandfill = false;
+            isPlastic = false;
+            isBonus = false;
+            itemInLake = false;
+            System.out.println(fishingCategoryGacha);
+        });
+
+        papaPenguinImageView.setOnMouseClicked(mouseEvent ->
+        {
+            if (isCompost)
+            {
+                System.out.println("plastic correct");
+                startFishingConfettiAnimation(confettiGIFImageView);
+            }
+            else if (isBonus)
+            {
+                System.out.println("was bonus, very good");
+                startFishingConfettiAnimation(confettiGIFImageView);
+            }
+            else
+            {
+                System.out.println("not bonus or plastic");
+            }
+            fishingItemImageView.setTranslateY(-2000);
+            fishingItemImageView.setTranslateX(-2000);
+            isCompost = false;
+            isLandfill = false;
+            isPlastic = false;
+            isBonus = false;
+            itemInLake = false;
         });
 
     }
@@ -607,18 +937,33 @@ public class Main extends Application {
         ImageView mgsbackButtonImageView = new ImageView(mgsbackButtonImage);
         Image papaPenguinImage = new Image(new FileInputStream("src/Sprites/papaPenguin.png"));
         ImageView papaPenguinImageView = new ImageView(papaPenguinImage);
-        Image mamaPenguinImage = new Image(new FileInputStream("src/Sprites/mamaPenguin.png"));
+        Image mamaPenguinImage = new Image(new FileInputStream("src/Sprites/cleanmamaPenguin.png"));
         ImageView mamaPenguinImageView = new ImageView(mamaPenguinImage);
         Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/babyPenguin.png"));
         ImageView babyPenguinImageView = new ImageView(babyPenguinImage);
+        Image textBubbleImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView textBubbleImageView = new ImageView(textBubbleImage);
+        Image mamaPortraitImage = new Image(new FileInputStream("src/Sprites/mamaPortrait.png"));
+        ImageView mamaPortraitImageView = new ImageView(mamaPortraitImage);
 
         mainGroup.getChildren().add(mamaGamePane);
-        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView);
+        mamaGamePane.getChildren().add(textBubbleImageView);
+        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView);
+
+        mamaPortraitImageView.setFitHeight(200);
+        mamaPortraitImageView.setFitWidth(200);
+        mamaPortraitImageView.setTranslateY(0);
+        mamaPortraitImageView.setTranslateX(-100);
+
+        textBubbleImageView.setFitHeight(250);
+        textBubbleImageView.setFitWidth(1000);
+        textBubbleImageView.setTranslateY(0);
+        textBubbleImageView.setTranslateX(250);
 
         mgsbackButtonImageView.setFitHeight(100);
         mgsbackButtonImageView.setFitWidth(200);
-        mgsbackButtonImageView.setTranslateY(0);
-        mgsbackButtonImageView.setTranslateX(0);
+        mgsbackButtonImageView.setTranslateY(-80);
+        mgsbackButtonImageView.setTranslateX(-400);
         mgsbackButtonImageView.setPreserveRatio(true);
 
         mamaPenguinImageView.setFitHeight(150);
@@ -627,9 +972,65 @@ public class Main extends Application {
         mamaPenguinImageView.setTranslateX(200);
         mamaPenguinImageView.setPreserveRatio(true);
 
+
         mgsbackButtonImageView.setOnMouseClicked(mouseEvent ->
         {
             System.out.println("closing mamaGameScene and opening GameScene");
+            openGameScene();
+            //backGame();
+        });
+
+    }
+
+    public void setShopScene() throws FileNotFoundException
+    {
+        Image sgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
+        ImageView sgsbackButtonImageView = new ImageView(sgsbackButtonImage);
+        Image mgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
+        ImageView mgsbackButtonImageView = new ImageView(mgsbackButtonImage);
+        Image papaPenguinImage = new Image(new FileInputStream("src/Sprites/papaPenguin.png"));
+        ImageView papaPenguinImageView = new ImageView(papaPenguinImage);
+        Image mamaPenguinImage = new Image(new FileInputStream("src/Sprites/cleanmamaPenguin.png"));
+        ImageView mamaPenguinImageView = new ImageView(mamaPenguinImage);
+        Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/babyPenguin.png"));
+        ImageView babyPenguinImageView = new ImageView(babyPenguinImage);
+        Image textBubbleImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView textBubbleImageView = new ImageView(textBubbleImage);
+        Image mamaPortraitImage = new Image(new FileInputStream("src/Sprites/mamaPortrait.png"));
+        ImageView mamaPortraitImageView = new ImageView(mamaPortraitImage);
+        Image shopImage = new Image(new FileInputStream("src/Sprites/shop.png"));
+        ImageView shopImageView = new ImageView(shopImage);
+
+        mainGroup.getChildren().add(shopPane);
+        shopPane.getChildren().add(textBubbleImageView);
+        shopPane.getChildren().addAll(sgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView, shopImageView);
+
+        mamaPortraitImageView.setFitHeight(200);
+        mamaPortraitImageView.setFitWidth(200);
+        mamaPortraitImageView.setTranslateY(0);
+        mamaPortraitImageView.setTranslateX(-100);
+
+        textBubbleImageView.setFitHeight(250);
+        textBubbleImageView.setFitWidth(1000);
+        textBubbleImageView.setTranslateY(0);
+        textBubbleImageView.setTranslateX(250);
+
+        sgsbackButtonImageView.setFitHeight(100);
+        sgsbackButtonImageView.setFitWidth(200);
+        sgsbackButtonImageView.setTranslateY(-80);
+        sgsbackButtonImageView.setTranslateX(-400);
+        sgsbackButtonImageView.setPreserveRatio(true);
+
+        mamaPenguinImageView.setFitHeight(150);
+        mamaPenguinImageView.setFitWidth(150);
+        mamaPenguinImageView.setTranslateY(300);
+        mamaPenguinImageView.setTranslateX(200);
+        mamaPenguinImageView.setPreserveRatio(true);
+
+
+        sgsbackButtonImageView.setOnMouseClicked(mouseEvent ->
+        {
+            System.out.println("closing shopScene and opening GameScene");
             openGameScene();
             //backGame();
         });
@@ -646,6 +1047,7 @@ public class Main extends Application {
             isBabyGameScene = false;
             isPapaGameScene = false;
             isMamaGameScene = false;
+            isShopScene = false;
         }
         else if (currentScene.equals("gameScene"))
         {
@@ -655,6 +1057,7 @@ public class Main extends Application {
             isBabyGameScene = false;
             isPapaGameScene = false;
             isMamaGameScene = false;
+            isShopScene = false;
         }
         else if (currentScene.equals("settingsScene")) {
             isMainScene = false;
@@ -663,6 +1066,7 @@ public class Main extends Application {
             isBabyGameScene = false;
             isPapaGameScene = false;
             isMamaGameScene = false;
+            isShopScene = false;
         }
         else if (currentScene.equals("babyGameScene")) {
             isMainScene = false;
@@ -671,6 +1075,7 @@ public class Main extends Application {
             isBabyGameScene = true;
             isPapaGameScene = false;
             isMamaGameScene = false;
+            isShopScene = false;
         }
         else if (currentScene.equals("papaGameScene")) {
             isMainScene = false;
@@ -679,6 +1084,7 @@ public class Main extends Application {
             isBabyGameScene = false;
             isPapaGameScene = true;
             isMamaGameScene = false;
+            isShopScene = false;
         }
         else if (currentScene.equals("mamaGameScene")) {
             isMainScene = false;
@@ -687,9 +1093,18 @@ public class Main extends Application {
             isBabyGameScene = false;
             isPapaGameScene = false;
             isMamaGameScene = true;
+            isShopScene = false;
         }
-
-
+        else if (currentScene.equals("shopScene"))
+        {
+            isMainScene = false;
+            isGameScene = false;
+            isSettingScene = false;
+            isBabyGameScene = false;
+            isPapaGameScene = false;
+            isMamaGameScene = false;
+            isShopScene = true;
+        }
     }
     //updates previousScene based on what scene is currently open. previousScene is used for the logic of settingScene
     public void updatePreviousScene()
@@ -713,6 +1128,10 @@ public class Main extends Application {
         else if (isMamaGameScene)
         {
             previousScene = "mamaGameScene";
+        }
+        else if (isShopScene)
+        {
+            previousScene = "shopScene";
         }
     }
     //Updates the scene from settings based on where the user last was when they clicked ESC
@@ -744,6 +1163,11 @@ public class Main extends Application {
             openMamaGameScene();
             updateIsSceneVariables("mamaGameScene");
         }
+        else if (previousScene.equals("shopScene"))
+        {
+            openShopScene();
+            updateIsSceneVariables("shopScene");
+        }
 
     }
     //opens Game Scene and closes other scenes
@@ -754,8 +1178,9 @@ public class Main extends Application {
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
+        mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(gamePane);
-        updateIsSceneVariables("gameScene"); //updates current scene to GameScene because SettingsScene is currently opened
+        updateIsSceneVariables("gameScene"); //updates current scene to GameScene because GameScene is currently opened
     }
     //opens Main Scene and closes other scenes
     public void openMainScene()
@@ -765,8 +1190,9 @@ public class Main extends Application {
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
+        mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(mainPane);
-        updateIsSceneVariables("mainScene"); //updates current scene to MainScene because SettingsScene is currently opened
+        updateIsSceneVariables("mainScene"); //updates current scene to MainScene because MainScene is currently opened
     }
     //opens Settings Scene and closes other scenes
     public void openSettingsScene()
@@ -776,10 +1202,11 @@ public class Main extends Application {
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
+        mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(settingsPane);
         updateIsSceneVariables("settingsScene"); //updates current scene to SettingsScene because SettingsScene is currently opened
     }
-    //opens Settings Scene and closes other scenes
+    //opens babyGameScene Scene and closes other scenes
     public void openBabyGameScene()
     {
         mainGroup.getChildren().remove(mainPane);
@@ -787,10 +1214,11 @@ public class Main extends Application {
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(papaGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
+        mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(babyGamePane);
-        updateIsSceneVariables("babyGameScene"); //updates current scene to SettingsScene because SettingsScene is currently opened
+        updateIsSceneVariables("babyGameScene"); //updates current scene to babyGameScene because babyGameScene is currently opened
     }
-    //opens Settings Scene and closes other scenes
+    //opens papaGameScene Scene and closes other scenes
     public void openPapaGameScene()
     {
         mainGroup.getChildren().remove(mainPane);
@@ -798,10 +1226,11 @@ public class Main extends Application {
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(mamaGamePane);
+        mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(papaGamePane);
-        updateIsSceneVariables("papaGameScene"); //updates current scene to SettingsScene because SettingsScene is currently opened
+        updateIsSceneVariables("papaGameScene"); //updates current scene to papaGameScene because papaGameScene is currently opened
     }
-    //opens Settings Scene and closes other scenes
+    //opens mamaGameScene Scene and closes other scenes
     public void openMamaGameScene()
     {
         mainGroup.getChildren().remove(mainPane);
@@ -809,8 +1238,20 @@ public class Main extends Application {
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
+        mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(mamaGamePane);
-        updateIsSceneVariables("mamaGameScene"); //updates current scene to SettingsScene because SettingsScene is currently opened
+        updateIsSceneVariables("mamaGameScene"); //updates current scene to mamaGameScene because mamaGameScene is currently opened
+    }
+    //opens shopScene and closes other scenes
+    public void openShopScene()
+    {
+        mainGroup.getChildren().remove(mainPane);
+        mainGroup.getChildren().remove(gamePane);
+        mainGroup.getChildren().remove(settingsPane);
+        mainGroup.getChildren().remove(babyGamePane);
+        mainGroup.getChildren().remove(papaGamePane);
+        mainGroup.getChildren().add(shopPane);
+        updateIsSceneVariables("shopScene"); //updates current scene to shopScene because shopScene is currently opened
     }
 //
 //    public void backMain()
@@ -853,6 +1294,44 @@ public class Main extends Application {
         {
             System.out.println("ERROR: Audio");
         }
+    }
+
+    //generates random number from min to max
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
+    //creates confetti animation for the fishing
+    private void startFishingConfettiAnimation(ImageView confettiImageView) {
+        confettiImageView.setTranslateX(250);
+        confettiImageView.setTranslateY(200); //this exact y-value was meant to make the confetti look like it appears from under the text box
+
+        //use fadeTransition to make the confetti gif fade in
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(500), confettiImageView);
+        fadeInTransition.setFromValue(0.0);
+        fadeInTransition.setToValue(1.0);
+
+        //use fadeTransition to make the confetti gif fade out
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.millis(500), confettiImageView);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+
+        //use pauseTransition to make the confetti gif stay for a little bit
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(500));
+
+        //merge all the transitions together
+        fadeInTransition.setOnFinished(event -> {
+            // Start the pause transition before starting the fade-out
+            pauseTransition.play();
+        });
+
+        pauseTransition.setOnFinished(event -> {
+            // Start the fade-out transition
+            fadeOutTransition.play();
+        });
+
+        //starts the actual transition
+        fadeInTransition.play();
     }
 
 
