@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main extends Application {
     private static int iceCubes = 0; //currency for the game
@@ -27,6 +29,8 @@ public class Main extends Application {
     boolean isPapaGameScene=false;
     boolean isMamaGameScene=false;
     boolean isShopScene=false;
+    boolean isPullScene=false;
+    boolean isInventoryScene=false;
     boolean itemInLake=false;
     boolean isCompost=false;
     boolean isLandfill=false;
@@ -65,8 +69,8 @@ public class Main extends Application {
     String[] mamaSpeech = {mamaSpeech1, mamaSpeech2, mamaSpeech3};
 
     String babySpeech1 = "hello! i am baby penguin!";
-    String babySpeech2 = "i found so many cool items in the ocean, but I don't know what they are!";
-    String babySpeech3 = "i need your help to decide if i should recycle or throw away what i found!";
+    String babySpeech2 = "i have a lot of questions about the world!";
+    String babySpeech3 = "please help me ";
     String babySpeech4 = "if you think the item i found is recyclable, click on papa!";
     String babySpeech5 = "if you think the item should not be recycled, click on mama!";
     String babySpeech6 = "you will have 30 seconds to sort the treasures! you're going to do great!";
@@ -593,17 +597,83 @@ public class Main extends Application {
         ImageView babyPenguinImageView = new ImageView(babyPenguinImage);
         Image textBubbleImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
         ImageView textBubbleImageView = new ImageView(textBubbleImage);
+        Image firstChoiceImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView firstChoiceImageView = new ImageView(firstChoiceImage);
+        Image secondChoiceImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView secondChoiceImageView = new ImageView(secondChoiceImage);
+        Image thirdChoiceImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView thirdChoiceImageView = new ImageView(thirdChoiceImage);
+        Image fourthChoiceImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
+        ImageView fourthChoiceImageView = new ImageView(fourthChoiceImage);
         Image babyPortraitImage = new Image(new FileInputStream("src/Sprites/babyPortrait.png"));
         ImageView babyPortraitImageView = new ImageView(babyPortraitImage);
 
+        Text firstChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH");
+        Text secondChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH ");
+        Text thirdChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH ");
+        Text fourthChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH ");
 
         mainGroup.getChildren().add(babyGamePane);
-        babyGamePane.getChildren().addAll(bgsbackButtonImageView, babyPenguinImageView,textBubbleImageView,babyPortraitImageView);
+        babyGamePane.getChildren().addAll(bgsbackButtonImageView, babyPenguinImageView,textBubbleImageView,babyPortraitImageView, firstChoiceImageView, secondChoiceImageView, thirdChoiceImageView, fourthChoiceImageView, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
 
         textBubbleImageView.setFitHeight(250);
         textBubbleImageView.setFitWidth(1000);
         textBubbleImageView.setTranslateY(0);
         textBubbleImageView.setTranslateX(250);
+
+        firstChoiceImageView.setFitHeight(150);
+        firstChoiceImageView.setFitWidth(525);
+        firstChoiceImageView.setTranslateY(250);
+        firstChoiceImageView.setTranslateX(-175);
+
+        firstChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        firstChoiceText.setTranslateY(250);
+        firstChoiceText.setTranslateX(-175);
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth1 = firstChoiceText.getLayoutBounds().getWidth();
+        firstChoiceText.setWrappingWidth(initialWidth1 - 450);
+        firstChoiceText.setTranslateX(-450);
+
+        secondChoiceImageView.setFitHeight(150);
+        secondChoiceImageView.setFitWidth(525);
+        secondChoiceImageView.setTranslateY(250);
+        secondChoiceImageView.setTranslateX(550);
+
+        secondChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        secondChoiceText.setTranslateY(250);
+        secondChoiceText.setTranslateX(550);
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth2 = secondChoiceText.getLayoutBounds().getWidth();
+        secondChoiceText.setWrappingWidth(initialWidth2 - 450);
+        secondChoiceText.setTranslateX(275);
+
+        thirdChoiceImageView.setFitHeight(150);
+        thirdChoiceImageView.setFitWidth(525);
+        thirdChoiceImageView.setTranslateY(500);
+        thirdChoiceImageView.setTranslateX(-175);
+
+        thirdChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        thirdChoiceText.setTranslateY(500);
+        thirdChoiceText.setTranslateX(-175);
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth3 = thirdChoiceText.getLayoutBounds().getWidth();
+        thirdChoiceText.setWrappingWidth(initialWidth3 - 450);
+        thirdChoiceText.setTranslateX(-450);
+
+        fourthChoiceImageView.setFitHeight(150);
+        fourthChoiceImageView.setFitWidth(525);
+        fourthChoiceImageView.setTranslateY(500);
+        fourthChoiceImageView.setTranslateX(550);
+
+        fourthChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        fourthChoiceText.setTranslateY(500);
+        fourthChoiceText.setTranslateX(550);
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth4 = fourthChoiceText.getLayoutBounds().getWidth();
+        fourthChoiceText.setWrappingWidth(initialWidth4 - 450);
+        fourthChoiceText.setTranslateX(275);
+
+
 
         bgsbackButtonImageView.setFitHeight(100);
         bgsbackButtonImageView.setFitWidth(200);
@@ -613,7 +683,7 @@ public class Main extends Application {
 
         babyPenguinImageView.setFitHeight(150);
         babyPenguinImageView.setFitWidth(150);
-        babyPenguinImageView.setTranslateY(300);
+        babyPenguinImageView.setTranslateY(325);
         babyPenguinImageView.setTranslateX(200);
         babyPenguinImageView.setPreserveRatio(true);
 
@@ -988,10 +1058,50 @@ public class Main extends Application {
         ImageView textBubbleImageView = new ImageView(textBubbleImage);
         Image mamaPortraitImage = new Image(new FileInputStream("src/Sprites/mamaPortrait.png"));
         ImageView mamaPortraitImageView = new ImageView(mamaPortraitImage);
+        Image defaultCardImage = new Image(new FileInputStream("src/MinigameSprites/MatchingGame/defaultCard.png"));
+        Image iceCard = new Image(new FileInputStream("src/MinigameSprites/MatchingGame/iceCard.png"));
+        ImageView defaultCardImageView1 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView2 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView3 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView4 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView5 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView6 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView7 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView8 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView9 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView10 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView11 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView12 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView13 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView14 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView15 = new ImageView(defaultCardImage);
+        ImageView defaultCardImageView16 = new ImageView(defaultCardImage);
+
+
+        ImageView placeholderView1 = new ImageView(iceCard);
+        ImageView placeholderView2 = new ImageView(iceCard);
+        ImageView placeholderView3 = new ImageView(iceCard);
+        ImageView placeholderView4 = new ImageView(iceCard);
+        ImageView placeholderView5 = new ImageView(iceCard);
+        ImageView placeholderView6 = new ImageView(iceCard);
+        ImageView placeholderView7 = new ImageView(iceCard);
+        ImageView placeholderView8 = new ImageView(iceCard);
+        ImageView placeholderView9 = new ImageView(iceCard);
+        ImageView placeholderView10 = new ImageView(iceCard);
+        ImageView placeholderView11 = new ImageView(iceCard);
+        ImageView placeholderView12 = new ImageView(iceCard);
+        ImageView placeholderView13 = new ImageView(iceCard);
+        ImageView placeholderView14 = new ImageView(iceCard);
+        ImageView placeholderView15 = new ImageView(iceCard);
+        ImageView placeholderView16 = new ImageView(iceCard);
+
+        ArrayList<ImageView> placeholderList = new ArrayList<>();
+        placeholderList.addAll(Arrays.asList(placeholderView1,placeholderView2,placeholderView3,placeholderView4,placeholderView5,placeholderView6,placeholderView7,placeholderView8,placeholderView9,placeholderView10,placeholderView11,placeholderView12,placeholderView13,placeholderView14,placeholderView15,placeholderView16));
 
         mainGroup.getChildren().add(mamaGamePane);
         mamaGamePane.getChildren().add(textBubbleImageView);
-        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView);
+        mamaGamePane.getChildren().addAll(placeholderView1,placeholderView2,placeholderView3,placeholderView4,placeholderView5,placeholderView6,placeholderView7,placeholderView8,placeholderView9,placeholderView10,placeholderView11,placeholderView12,placeholderView13,placeholderView14,placeholderView15,placeholderView16);
+        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView,defaultCardImageView1,defaultCardImageView2,defaultCardImageView3,defaultCardImageView4,defaultCardImageView5,defaultCardImageView6,defaultCardImageView7,defaultCardImageView8,defaultCardImageView9,defaultCardImageView10,defaultCardImageView11,defaultCardImageView12,defaultCardImageView13,defaultCardImageView14,defaultCardImageView15,defaultCardImageView16);
 
         mamaPortraitImageView.setFitHeight(200);
         mamaPortraitImageView.setFitWidth(200);
@@ -1011,9 +1121,114 @@ public class Main extends Application {
 
         mamaPenguinImageView.setFitHeight(150);
         mamaPenguinImageView.setFitWidth(150);
-        mamaPenguinImageView.setTranslateY(300);
-        mamaPenguinImageView.setTranslateX(200);
+        mamaPenguinImageView.setTranslateY(50);
+        mamaPenguinImageView.setTranslateX(-400);
         mamaPenguinImageView.setPreserveRatio(true);
+
+        placeholderView1.setFitHeight(80);
+        placeholderView1.setFitWidth(80);
+        placeholderView1.setTranslateY(200);
+        placeholderView1.setTranslateX(0);
+        placeholderView1.setPreserveRatio(false);
+
+        defaultCardImageView1.setFitHeight(125);
+        defaultCardImageView1.setFitWidth(125);
+        defaultCardImageView1.setTranslateY(200);
+        defaultCardImageView1.setTranslateX(10);
+        defaultCardImageView1.setPreserveRatio(true);
+
+        defaultCardImageView2.setFitHeight(125);
+        defaultCardImageView2.setFitWidth(125);
+        defaultCardImageView2.setTranslateY(325);
+        defaultCardImageView2.setTranslateX(10);
+        defaultCardImageView2.setPreserveRatio(true);
+
+        defaultCardImageView3.setFitHeight(125);
+        defaultCardImageView3.setFitWidth(125);
+        defaultCardImageView3.setTranslateY(450);
+        defaultCardImageView3.setTranslateX(10);
+        defaultCardImageView3.setPreserveRatio(true);
+
+        defaultCardImageView4.setFitHeight(125);
+        defaultCardImageView4.setFitWidth(125);
+        defaultCardImageView4.setTranslateY(575);
+        defaultCardImageView4.setTranslateX(10);
+        defaultCardImageView4.setPreserveRatio(true);
+
+        defaultCardImageView5.setFitHeight(125);
+        defaultCardImageView5.setFitWidth(125);
+        defaultCardImageView5.setTranslateY(200);
+        defaultCardImageView5.setTranslateX(135);
+        defaultCardImageView5.setPreserveRatio(true);
+
+        defaultCardImageView6.setFitHeight(125);
+        defaultCardImageView6.setFitWidth(125);
+        defaultCardImageView6.setTranslateY(325);
+        defaultCardImageView6.setTranslateX(135);
+        defaultCardImageView6.setPreserveRatio(true);
+
+        defaultCardImageView7.setFitHeight(125);
+        defaultCardImageView7.setFitWidth(125);
+        defaultCardImageView7.setTranslateY(450);
+        defaultCardImageView7.setTranslateX(135);
+        defaultCardImageView7.setPreserveRatio(true);
+
+        defaultCardImageView8.setFitHeight(125);
+        defaultCardImageView8.setFitWidth(125);
+        defaultCardImageView8.setTranslateY(575);
+        defaultCardImageView8.setTranslateX(135);
+        defaultCardImageView8.setPreserveRatio(true);
+
+        defaultCardImageView9.setFitHeight(125);
+        defaultCardImageView9.setFitWidth(125);
+        defaultCardImageView9.setTranslateY(200);
+        defaultCardImageView9.setTranslateX(260);
+        defaultCardImageView9.setPreserveRatio(true);
+
+        defaultCardImageView10.setFitHeight(125);
+        defaultCardImageView10.setFitWidth(125);
+        defaultCardImageView10.setTranslateY(325);
+        defaultCardImageView10.setTranslateX(260);
+        defaultCardImageView10.setPreserveRatio(true);
+
+        defaultCardImageView11.setFitHeight(125);
+        defaultCardImageView11.setFitWidth(125);
+        defaultCardImageView11.setTranslateY(450);
+        defaultCardImageView11.setTranslateX(260);
+        defaultCardImageView11.setPreserveRatio(true);
+
+        defaultCardImageView12.setFitHeight(125);
+        defaultCardImageView12.setFitWidth(125);
+        defaultCardImageView12.setTranslateY(575);
+        defaultCardImageView12.setTranslateX(260);
+        defaultCardImageView12.setPreserveRatio(true);
+
+        defaultCardImageView13.setFitHeight(125);
+        defaultCardImageView13.setFitWidth(125);
+        defaultCardImageView13.setTranslateY(200);
+        defaultCardImageView13.setTranslateX(385);
+        defaultCardImageView13.setPreserveRatio(true);
+
+        defaultCardImageView14.setFitHeight(125);
+        defaultCardImageView14.setFitWidth(125);
+        defaultCardImageView14.setTranslateY(325);
+        defaultCardImageView14.setTranslateX(385);
+        defaultCardImageView14.setPreserveRatio(true);
+
+        defaultCardImageView15.setFitHeight(125);
+        defaultCardImageView15.setFitWidth(125);
+        defaultCardImageView15.setTranslateY(450);
+        defaultCardImageView15.setTranslateX(385);
+        defaultCardImageView15.setPreserveRatio(true);
+
+        defaultCardImageView16.setFitHeight(125);
+        defaultCardImageView16.setFitWidth(125);
+        defaultCardImageView16.setTranslateY(575);
+        defaultCardImageView16.setTranslateX(385);
+        defaultCardImageView16.setPreserveRatio(true);
+
+
+
 
 
         mgsbackButtonImageView.setOnMouseClicked(mouseEvent ->
@@ -1029,24 +1244,16 @@ public class Main extends Application {
     {
         Image sgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
         ImageView sgsbackButtonImageView = new ImageView(sgsbackButtonImage);
-        Image mgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
-        ImageView mgsbackButtonImageView = new ImageView(mgsbackButtonImage);
-        Image papaPenguinImage = new Image(new FileInputStream("src/Sprites/papaPenguin.png"));
-        ImageView papaPenguinImageView = new ImageView(papaPenguinImage);
-        Image mamaPenguinImage = new Image(new FileInputStream("src/Sprites/cleanmamaPenguin.png"));
-        ImageView mamaPenguinImageView = new ImageView(mamaPenguinImage);
-        Image babyPenguinImage = new Image(new FileInputStream("src/Sprites/babyPenguin.png"));
-        ImageView babyPenguinImageView = new ImageView(babyPenguinImage);
         Image textBubbleImage = new Image(new FileInputStream("src/Sprites/textBubble.png"));
         ImageView textBubbleImageView = new ImageView(textBubbleImage);
         Image mamaPortraitImage = new Image(new FileInputStream("src/Sprites/mamaPortrait.png"));
         ImageView mamaPortraitImageView = new ImageView(mamaPortraitImage);
-        Image shopImage = new Image(new FileInputStream("src/Sprites/shop.png"));
-        ImageView shopImageView = new ImageView(shopImage);
+        Image eggImage = new Image(new FileInputStream("src/Sprites/mysteryEgg.png"));
+        ImageView eggImageView = new ImageView(eggImage);
 
         mainGroup.getChildren().add(shopPane);
         shopPane.getChildren().add(textBubbleImageView);
-        shopPane.getChildren().addAll(sgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView, shopImageView);
+        shopPane.getChildren().addAll(sgsbackButtonImageView,mamaPortraitImageView, eggImageView);
 
         mamaPortraitImageView.setFitHeight(200);
         mamaPortraitImageView.setFitWidth(200);
@@ -1064,11 +1271,11 @@ public class Main extends Application {
         sgsbackButtonImageView.setTranslateX(-400);
         sgsbackButtonImageView.setPreserveRatio(true);
 
-        mamaPenguinImageView.setFitHeight(150);
-        mamaPenguinImageView.setFitWidth(150);
-        mamaPenguinImageView.setTranslateY(300);
-        mamaPenguinImageView.setTranslateX(200);
-        mamaPenguinImageView.setPreserveRatio(true);
+        eggImageView.setFitHeight(150);
+        eggImageView.setFitWidth(150);
+        eggImageView.setTranslateY(300);
+        eggImageView.setTranslateX(200);
+        eggImageView.setPreserveRatio(true);
 
 
         sgsbackButtonImageView.setOnMouseClicked(mouseEvent ->
@@ -1077,6 +1284,16 @@ public class Main extends Application {
             openGameScene();
             //backGame();
         });
+
+    }
+
+    public void setPullScene()
+    {
+
+    }
+
+    public void setInventoryScene()
+    {
 
     }
     //updates isScene variables to whatever String is inputted into the parameter
@@ -1091,6 +1308,8 @@ public class Main extends Application {
             isPapaGameScene = false;
             isMamaGameScene = false;
             isShopScene = false;
+            isPullScene = false;
+            isInventoryScene = false;
         }
         else if (currentScene.equals("gameScene"))
         {
@@ -1101,6 +1320,8 @@ public class Main extends Application {
             isPapaGameScene = false;
             isMamaGameScene = false;
             isShopScene = false;
+            isPullScene = false;
+            isInventoryScene = false;
         }
         else if (currentScene.equals("settingsScene")) {
             isMainScene = false;
@@ -1110,6 +1331,8 @@ public class Main extends Application {
             isPapaGameScene = false;
             isMamaGameScene = false;
             isShopScene = false;
+            isPullScene = false;
+            isInventoryScene = false;
         }
         else if (currentScene.equals("babyGameScene")) {
             isMainScene = false;
@@ -1119,6 +1342,8 @@ public class Main extends Application {
             isPapaGameScene = false;
             isMamaGameScene = false;
             isShopScene = false;
+            isPullScene = false;
+            isInventoryScene = false;
         }
         else if (currentScene.equals("papaGameScene")) {
             isMainScene = false;
@@ -1128,6 +1353,8 @@ public class Main extends Application {
             isPapaGameScene = true;
             isMamaGameScene = false;
             isShopScene = false;
+            isPullScene = false;
+            isInventoryScene = false;
         }
         else if (currentScene.equals("mamaGameScene")) {
             isMainScene = false;
@@ -1137,6 +1364,8 @@ public class Main extends Application {
             isPapaGameScene = false;
             isMamaGameScene = true;
             isShopScene = false;
+            isPullScene = false;
+            isInventoryScene = false;
         }
         else if (currentScene.equals("shopScene"))
         {
@@ -1147,6 +1376,32 @@ public class Main extends Application {
             isPapaGameScene = false;
             isMamaGameScene = false;
             isShopScene = true;
+            isPullScene = false;
+            isInventoryScene = false;
+        }
+        else if (currentScene.equals("pullScene"))
+        {
+            isMainScene = false;
+            isGameScene = false;
+            isSettingScene = false;
+            isBabyGameScene = false;
+            isPapaGameScene = false;
+            isMamaGameScene = false;
+            isShopScene = false;
+            isPullScene = true;
+            isInventoryScene = false;
+        }
+        else if (currentScene.equals("inventoryScene"))
+        {
+            isMainScene = false;
+            isGameScene = false;
+            isSettingScene = false;
+            isBabyGameScene = false;
+            isPapaGameScene = false;
+            isMamaGameScene = false;
+            isShopScene = false;
+            isPullScene = false;
+            isInventoryScene = true;
         }
     }
     //updates previousScene based on what scene is currently open. previousScene is used for the logic of settingScene
@@ -1175,6 +1430,14 @@ public class Main extends Application {
         else if (isShopScene)
         {
             previousScene = "shopScene";
+        }
+        else if (isPullScene)
+        {
+            previousScene = "pullScene";
+        }
+        else if (isInventoryScene)
+        {
+            previousScene = "inventoryScene";
         }
     }
     //Updates the scene from settings based on where the user last was when they clicked ESC
