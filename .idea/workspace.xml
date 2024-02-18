@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99944dbe-639a-437e-ab7b-350d1a7900b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/MatchingGame/defaultCard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/MatchingGame/iceCard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/mysteryEgg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Effects/confetti2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/buyButton.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -50,11 +49,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Shop" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Effects" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\MatchingGame" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Sprites" />
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Effects" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Bonus" />
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Recycle" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -135,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708285948251</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="began development of quiz minigame">
+      <created>1708289159352</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708289159352</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,7 +161,8 @@
     <MESSAGE value="Added text and placeholder minigames" />
     <MESSAGE value="Added fishing minigame and shop" />
     <MESSAGE value="Completely finished fishing minigame" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completely finished fishing minigame" />
+    <MESSAGE value="began development of quiz minigame" />
+    <option name="LAST_COMMIT_MESSAGE" value="began development of quiz minigame" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

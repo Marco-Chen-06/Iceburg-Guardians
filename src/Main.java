@@ -20,6 +20,7 @@ import java.util.Arrays;
 public class Main extends Application {
     private static int iceCubes = 0; //currency for the game
     private static int speechIndex;
+    private static int quizGacha = 0;
     private static int fishingSpeechIndex=0;
     boolean escPressed=false;
     boolean isMainScene=false;
@@ -59,22 +60,22 @@ public class Main extends Application {
 
     //Dialogue Lines
     String papaSpeech1 = "Hello again, friend!";
-    String papaSpeech2 = "...";
-    String papaSpeech3 = "play my game now i am papa";
+    String papaSpeech2 = "We're gonna go fishing today!";
+    String papaSpeech3 = "Click the right arrow if you want to join!";
     String[] papaSpeech = {papaSpeech1, papaSpeech2, papaSpeech3};
 
-    String mamaSpeech1 = "i am mama hello little boy, im mama";
-    String mamaSpeech2 = "with this mama i summon";
-    String mamaSpeech3 = "placeholder mom text";
+    String mamaSpeech1 = "Hey there I'm mama. Want to practice memory with me?";
+    String mamaSpeech2 = "It's recycling themed!";
+    String mamaSpeech3 = "Click to right arrow to start the game!";
     String[] mamaSpeech = {mamaSpeech1, mamaSpeech2, mamaSpeech3};
 
-    String babySpeech1 = "hello! i am baby penguin!";
-    String babySpeech2 = "i have a lot of questions about the world!";
-    String babySpeech3 = "please help me ";
-    String babySpeech4 = "if you think the item i found is recyclable, click on papa!";
-    String babySpeech5 = "if you think the item should not be recycled, click on mama!";
-    String babySpeech6 = "you will have 30 seconds to sort the treasures! you're going to do great!";
-    String babySpeech7 = "when you are ready, click the right arrow to begin!";
+    String babySpeech1 = "Hello! I am baby penguin!";
+    String babySpeech2 = "I have a lot of questions about the world!";
+    String babySpeech3 = "Why are our iceburgs melting? ";
+    String babySpeech4 = "What's it like outside of Antartica?";
+    String babySpeech5 = "Anyways, today I'm going to put my knowledge to the test.";
+    String babySpeech6 = "They are about the environment themed. Want to help me?";
+    String babySpeech7 = "When you are ready, click the right arrow to begin!";
     String[] babySpeech = {babySpeech1, babySpeech2, babySpeech3, babySpeech4, babySpeech5, babySpeech6, babySpeech7};
 
 
@@ -607,27 +608,49 @@ public class Main extends Application {
         ImageView fourthChoiceImageView = new ImageView(fourthChoiceImage);
         Image babyPortraitImage = new Image(new FileInputStream("src/Sprites/babyPortrait.png"));
         ImageView babyPortraitImageView = new ImageView(babyPortraitImage);
+        Image iceCubeImage = new Image(new FileInputStream("src/Sprites/icecubes.png"));
+        ImageView iceCubeImageView = new ImageView(iceCubeImage);
+        Text bgsIceCubeTextHolder = new Text("");
+        Image confettiGIF = new Image(new FileInputStream("src/Effects/confetti2.gif"));
+        ImageView confettiGIFImageView = new ImageView(confettiGIF);
 
-        Text firstChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH");
-        Text secondChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH ");
-        Text thirdChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH ");
-        Text fourthChoiceText = new Text ("LONGER SIZED PLACEHOLDER IN LENGTH ");
+        Text firstChoiceText = new Text ("Only because papa penguin said to!");
+        Text secondChoiceText = new Text ("To help keep the Earth safe and clean!");
+        Text thirdChoiceText = new Text ("Recycling is not important!");
+        Text fourthChoiceText = new Text ("To build more factories!!!!!!!!!");
+        Text questionText = new Text("Why is it important to recycle?");
+
 
         mainGroup.getChildren().add(babyGamePane);
-        babyGamePane.getChildren().addAll(bgsbackButtonImageView, babyPenguinImageView,textBubbleImageView,babyPortraitImageView, firstChoiceImageView, secondChoiceImageView, thirdChoiceImageView, fourthChoiceImageView, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+        babyGamePane.getChildren().addAll(bgsbackButtonImageView, babyPenguinImageView,textBubbleImageView,babyPortraitImageView, firstChoiceImageView, secondChoiceImageView, thirdChoiceImageView, fourthChoiceImageView, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText, questionText, iceCubeImageView, bgsIceCubeTextHolder, confettiGIFImageView);
+
+        //hides the confetti initially
+        //the real translate values are in the startConfettiAnimation() method
+        confettiGIFImageView.setTranslateY(-1000);
+        confettiGIFImageView.setTranslateX(-1000);
+        confettiGIFImageView.setFitHeight(350);
+        confettiGIFImageView.setFitWidth(500);
+        confettiGIFImageView.setPreserveRatio(true);
 
         textBubbleImageView.setFitHeight(250);
         textBubbleImageView.setFitWidth(1000);
-        textBubbleImageView.setTranslateY(0);
+        textBubbleImageView.setTranslateY(-25);
         textBubbleImageView.setTranslateX(250);
+
+        questionText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        questionText.setTranslateY(-25);
+        questionText.setTranslateX(250);
+        double initialWidth5 = questionText.getLayoutBounds().getWidth();
+        questionText.setWrappingWidth(initialWidth5 - 450);
+        questionText.setTranslateX(-25);
 
         firstChoiceImageView.setFitHeight(150);
         firstChoiceImageView.setFitWidth(525);
-        firstChoiceImageView.setTranslateY(250);
+        firstChoiceImageView.setTranslateY(225);
         firstChoiceImageView.setTranslateX(-175);
 
         firstChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        firstChoiceText.setTranslateY(250);
+        firstChoiceText.setTranslateY(225);
         firstChoiceText.setTranslateX(-175);
         // calculates the initial width and set the WrappingWidth accordingly
         double initialWidth1 = firstChoiceText.getLayoutBounds().getWidth();
@@ -636,11 +659,11 @@ public class Main extends Application {
 
         secondChoiceImageView.setFitHeight(150);
         secondChoiceImageView.setFitWidth(525);
-        secondChoiceImageView.setTranslateY(250);
+        secondChoiceImageView.setTranslateY(225);
         secondChoiceImageView.setTranslateX(550);
 
         secondChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        secondChoiceText.setTranslateY(250);
+        secondChoiceText.setTranslateY(225);
         secondChoiceText.setTranslateX(550);
         // calculates the initial width and set the WrappingWidth accordingly
         double initialWidth2 = secondChoiceText.getLayoutBounds().getWidth();
@@ -649,11 +672,11 @@ public class Main extends Application {
 
         thirdChoiceImageView.setFitHeight(150);
         thirdChoiceImageView.setFitWidth(525);
-        thirdChoiceImageView.setTranslateY(500);
+        thirdChoiceImageView.setTranslateY(475);
         thirdChoiceImageView.setTranslateX(-175);
 
         thirdChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        thirdChoiceText.setTranslateY(500);
+        thirdChoiceText.setTranslateY(475);
         thirdChoiceText.setTranslateX(-175);
         // calculates the initial width and set the WrappingWidth accordingly
         double initialWidth3 = thirdChoiceText.getLayoutBounds().getWidth();
@@ -662,11 +685,11 @@ public class Main extends Application {
 
         fourthChoiceImageView.setFitHeight(150);
         fourthChoiceImageView.setFitWidth(525);
-        fourthChoiceImageView.setTranslateY(500);
+        fourthChoiceImageView.setTranslateY(475);
         fourthChoiceImageView.setTranslateX(550);
 
         fourthChoiceText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        fourthChoiceText.setTranslateY(500);
+        fourthChoiceText.setTranslateY(475);
         fourthChoiceText.setTranslateX(550);
         // calculates the initial width and set the WrappingWidth accordingly
         double initialWidth4 = fourthChoiceText.getLayoutBounds().getWidth();
@@ -674,22 +697,78 @@ public class Main extends Application {
         fourthChoiceText.setTranslateX(275);
 
 
+        iceCubeImageView.setFitHeight(75);
+        iceCubeImageView.setFitWidth(75);
+        iceCubeImageView.setTranslateY(600);
+        iceCubeImageView.setTranslateX(-450);
+//        iceCubeImageView.setPreserveRatio(true);
+
+        bgsIceCubeTextHolder.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        bgsIceCubeTextHolder.setTranslateY(600);
+        bgsIceCubeTextHolder.setTranslateX(-400);
+
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth = bgsIceCubeTextHolder.getLayoutBounds().getWidth();
+        bgsIceCubeTextHolder.setWrappingWidth(initialWidth - 200);
+
+        bgsIceCubeTextHolder.setTranslateX(-510);
+
+        //creates a thread that constantly updates the text of gsIceCubeRunnable
+        IceCubeRunnable bgsIceCubeRunnable = new IceCubeRunnable(bgsIceCubeTextHolder);
+        Thread bgsThread = new Thread(bgsIceCubeRunnable);
+        bgsThread.start();
+
+
+        //I will code all the logic for quiz here and move down later possibly -----------
+        firstChoiceImageView.setOnMouseClicked(mouseEvent ->
+                {
+                    if (quizGacha == 0) //why recycle question (incorrect)
+                    {
+                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                    }
+                });
+        secondChoiceImageView.setOnMouseClicked(mouseEvent ->
+                {
+                    if (quizGacha == 0) //why recycle question (correct)
+                    {
+                        iceCubes += 5;
+                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                        startQuizConfettiAnimation(confettiGIFImageView);
+                    }
+                });
+        thirdChoiceImageView.setOnMouseClicked(mouseEvent ->
+                {
+                    if (quizGacha == 0) //why recycle question (incorrect)
+                    {
+                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                    }
+                });
+        fourthChoiceImageView.setOnMouseClicked(mouseEvent ->
+                {
+                    if (quizGacha == 0) //why recycle question (incorrect)
+                    {
+                        updateQuestion(questionText, firstChoiceText, secondChoiceText, thirdChoiceText, fourthChoiceText);
+                    }
+                });
+
+        //--------------------------------------------------------------------------------
+
 
         bgsbackButtonImageView.setFitHeight(100);
         bgsbackButtonImageView.setFitWidth(200);
-        bgsbackButtonImageView.setTranslateY(-80);
+        bgsbackButtonImageView.setTranslateY(-105);
         bgsbackButtonImageView.setTranslateX(-400);
         bgsbackButtonImageView.setPreserveRatio(true);
 
         babyPenguinImageView.setFitHeight(150);
         babyPenguinImageView.setFitWidth(150);
-        babyPenguinImageView.setTranslateY(325);
+        babyPenguinImageView.setTranslateY(300);
         babyPenguinImageView.setTranslateX(200);
         babyPenguinImageView.setPreserveRatio(true);
 
         babyPortraitImageView.setFitHeight(200);
         babyPortraitImageView.setFitWidth(200);
-        babyPortraitImageView.setTranslateY(0);
+        babyPortraitImageView.setTranslateY(-25);
         babyPortraitImageView.setTranslateX(-100);
 
         System.out.println("hello");
@@ -700,6 +779,19 @@ public class Main extends Application {
             openGameScene();
             //backGame();
         });
+
+    }
+    private void updateQuestion(Text questionText, Text firstChoiceText, Text secondChoiceText, Text thirdChoiceText, Text fourthChoiceText)
+    {
+        quizGacha = getRandomNumber(0, 0); //rolls a random number from 0 to 0
+        if (quizGacha == 0)
+        {
+            questionText.setText("Why is it important to recycle?");
+            firstChoiceText.setText("Only because papa penguin said to!");
+            secondChoiceText.setText("To help keep the Earth safe and clean!");
+            thirdChoiceText.setText("Recycling is not important!");
+            fourthChoiceText.setText("To build more factories!!!!!!!!!");
+        }
     }
     public void setPapaGameScene() throws FileNotFoundException
     {
@@ -1250,10 +1342,17 @@ public class Main extends Application {
         ImageView mamaPortraitImageView = new ImageView(mamaPortraitImage);
         Image eggImage = new Image(new FileInputStream("src/Sprites/mysteryEgg.png"));
         ImageView eggImageView = new ImageView(eggImage);
+        Image buyButton = new Image(new FileInputStream("src/MinigameSprites/Shop/buyButton.png"));
+        ImageView buyButtonView = new ImageView(buyButton);
+        Image iceCubeImage = new Image(new FileInputStream("src/Sprites/icecubes.png"));
+        ImageView iceCubeImageView = new ImageView(iceCubeImage);
+
+        Text shopText = new Text("Use icecubes to hatch and win a penguin plush!");
+        Text pgsIceCubeTextHolder = new Text("");
 
         mainGroup.getChildren().add(shopPane);
         shopPane.getChildren().add(textBubbleImageView);
-        shopPane.getChildren().addAll(sgsbackButtonImageView,mamaPortraitImageView, eggImageView);
+        shopPane.getChildren().addAll(sgsbackButtonImageView,mamaPortraitImageView, eggImageView,buyButtonView,shopText,iceCubeImageView,pgsIceCubeTextHolder);
 
         mamaPortraitImageView.setFitHeight(200);
         mamaPortraitImageView.setFitWidth(200);
@@ -1267,15 +1366,47 @@ public class Main extends Application {
 
         sgsbackButtonImageView.setFitHeight(100);
         sgsbackButtonImageView.setFitWidth(200);
-        sgsbackButtonImageView.setTranslateY(-80);
+        sgsbackButtonImageView.setTranslateY(-130);
         sgsbackButtonImageView.setTranslateX(-400);
         sgsbackButtonImageView.setPreserveRatio(true);
 
-        eggImageView.setFitHeight(150);
-        eggImageView.setFitWidth(150);
+        eggImageView.setFitHeight(350);
+        eggImageView.setFitWidth(350);
         eggImageView.setTranslateY(300);
         eggImageView.setTranslateX(200);
         eggImageView.setPreserveRatio(true);
+
+        buyButtonView.setFitHeight(100);
+        buyButtonView.setFitWidth(200);
+        buyButtonView.setTranslateY(500);
+        buyButtonView.setTranslateX(195);
+        buyButtonView.setPreserveRatio(true);
+
+        iceCubeImageView.setFitHeight(75);
+        iceCubeImageView.setFitWidth(75);
+        iceCubeImageView.setTranslateY(570);
+        iceCubeImageView.setTranslateX(-450);
+        iceCubeImageView.setPreserveRatio(true);
+
+        shopText.setTranslateY(0);
+        shopText.setTranslateX(350);
+
+        pgsIceCubeTextHolder.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        pgsIceCubeTextHolder.setTranslateY(565);
+        pgsIceCubeTextHolder.setTranslateX(-400);
+
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth = pgsIceCubeTextHolder.getLayoutBounds().getWidth();
+        pgsIceCubeTextHolder.setWrappingWidth(initialWidth - 200);
+
+        pgsIceCubeTextHolder.setTranslateX(-510);
+
+        //creates a thread that constantly updates the text of gsIceCubeRunnable
+        IceCubeRunnable pgsIceCubeRunnable = new IceCubeRunnable(pgsIceCubeTextHolder);
+        Thread pgsThread = new Thread(pgsIceCubeRunnable);
+        pgsThread.start();
+
+        shopText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
 
         sgsbackButtonImageView.setOnMouseClicked(mouseEvent ->
@@ -1283,6 +1414,11 @@ public class Main extends Application {
             System.out.println("closing shopScene and opening GameScene");
             openGameScene();
             //backGame();
+        });
+
+        buyButtonView.setOnMouseClicked(mouseEvent ->
+        {
+
         });
 
     }
@@ -1611,6 +1747,37 @@ public class Main extends Application {
     private void startFishingConfettiAnimation(ImageView confettiImageView) {
         confettiImageView.setTranslateX(250);
         confettiImageView.setTranslateY(200); //this exact y-value was meant to make the confetti look like it appears from under the text box
+
+        //use fadeTransition to make the confetti gif fade in
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(500), confettiImageView);
+        fadeInTransition.setFromValue(0.0);
+        fadeInTransition.setToValue(1.0);
+
+        //use fadeTransition to make the confetti gif fade out
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.millis(500), confettiImageView);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+
+        //use pauseTransition to make the confetti gif stay for a little bit
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(500));
+
+        //merge all the transitions together
+        fadeInTransition.setOnFinished(event -> {
+            // Start the pause transition before starting the fade-out
+            pauseTransition.play();
+        });
+
+        pauseTransition.setOnFinished(event -> {
+            // Start the fade-out transition
+            fadeOutTransition.play();
+        });
+
+        //starts the actual transition
+        fadeInTransition.play();
+    }
+    private void startQuizConfettiAnimation(ImageView confettiImageView) {
+        confettiImageView.setTranslateX(200);
+        confettiImageView.setTranslateY(250); //this exact y-value was meant to make the confetti look like it appears from under the text box
 
         //use fadeTransition to make the confetti gif fade in
         FadeTransition fadeInTransition = new FadeTransition(Duration.millis(500), confettiImageView);
