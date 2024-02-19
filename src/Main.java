@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -11,14 +12,67 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Main extends Application {
+    private static boolean hasNeo = false;
+    private static boolean hasRockStar = false;
+    private static boolean hasAstronaut = false;
+    private static boolean hasCyborg = false;
+    private static boolean hasPopStar = false;
+    private static boolean hasTux = false;
+    private static boolean hasSaxophone = false;
+    private static boolean hasKing = false;
+    private static int flippedOverCount = 0;
+    private static boolean wonMemory = false;
+    private static int winCheckerCount = 0;
+    private static ArrayList<ImageView> flippedOverCardArr = new ArrayList<>();
+
+    Image commonImage = new Image(new FileInputStream("src/MinigameSprites/Shop/common.png"));
+    ImageView commonImageView1 = new ImageView(commonImage);
+    ImageView commonImageView2 = new ImageView(commonImage);
+    Image rareImage = new Image(new FileInputStream("src/MinigameSprites/Shop/rare.png"));
+    ImageView rareImageView1 = new ImageView(rareImage);
+    ImageView rareImageView2 = new ImageView(rareImage);
+    Image mythicImage = new Image(new FileInputStream("src/MinigameSprites/Shop/mythic.png"));
+    ImageView mythicImageView1 = new ImageView(mythicImage);
+    ImageView mythicImageView2 = new ImageView(mythicImage);
+    Image legendaryImage = new Image(new FileInputStream("src/MinigameSprites/Shop/legendary.png"));
+    ImageView legendaryImageView1 = new ImageView(legendaryImage);
+    ImageView legendaryImageView2 = new ImageView(legendaryImage);
+    Image majesticImage = new Image(new FileInputStream("src/MinigameSprites/Shop/majestic.png"));
+    ImageView majesticImageView = new ImageView(majesticImage);
+    Image sgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
+    ImageView sgsbackButtonImageView = new ImageView(sgsbackButtonImage);
+
+    Image neoSamuraiCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/neoSamuraiCard.png"));
+    ImageView neoSamuraiCardImageView = new ImageView(neoSamuraiCardImage);
+    Image popStarCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/popStarCard.png"));
+    ImageView popStarCardImageView = new ImageView(popStarCardImage);
+    Image astronautCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/astronautCard.png"));
+    ImageView astronautCardImageView = new ImageView(astronautCardImage);
+    Image cyborgCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/cyborgCard.png"));
+    ImageView cyborgCardImageView = new ImageView(cyborgCardImage);
+    Image kingCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/kingCard.png"));
+    ImageView kingCardImageView = new ImageView(kingCardImage);
+    Image poity1CardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/poity1Card.png"));
+    ImageView poity1CardImageView = new ImageView(poity1CardImage);
+    Image rockStarCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/rockStarCard.png"));
+    ImageView rockStarCardImageView = new ImageView(rockStarCardImage);
+    Image saxophoneCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/saxophoneCard.png"));
+    ImageView saxophoneCardImageView = new ImageView(saxophoneCardImage);
+    Image tuxCardImage = new Image(new FileInputStream("src/MinigameSprites/Shop/tuxCard.png"));
+    ImageView tuxCardImageView = new ImageView(tuxCardImage);
+    TextField codeEnter = new TextField("ENTER PROMO CODE HERE:");
     Text pulltext = new Text("What did you get?");
     Image tuxPenguinImage = new Image(new FileInputStream("src/Sprites/tuxPenguinPlush.png"));
     ImageView tuxPenguinImageView = new ImageView(tuxPenguinImage);
@@ -116,7 +170,7 @@ public class Main extends Application {
 
     String fishingSpeech1="Hi there! We need to fish for food!";
     String fishingSpeech2="However, sometimes we pick up garbage.";
-    String fishingSpeech3="Can you help us sort out between compost, plastic, and landfill? ";
+    String fishingSpeech3="Can you help us sort out between compost, plastic, and paper? ";
     String fishingSpeech4="Mama is in charge of plastic.";
     String fishingSpeech5="Baby is in charge of paper";
     String fishingSpeech6="....and I'm in charge of compost!";
@@ -136,7 +190,6 @@ public class Main extends Application {
 
 
     }
-
     @Override
     public void start(Stage primaryStage) throws Exception
     {
@@ -160,58 +213,58 @@ public class Main extends Application {
         setInventoryScene();
         mainGroup.getChildren().remove(inventoryPane);
 
-        pulltext.setTranslateY(-250);
-        pulltext.setTranslateX(150);
+        pulltext.setTranslateY(-150);
+        pulltext.setTranslateX(400);
 
-        pulltext.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        pulltext.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
 
         popStarPenguinImageView.setFitWidth(400);
         popStarPenguinImageView.setFitHeight(600);
         popStarPenguinImageView.setTranslateX(350);
-        popStarPenguinImageView.setTranslateY(200);
-//        popStarPenguinImageView.setPreserveRatio(true);
+        popStarPenguinImageView.setTranslateY(250);
+        popStarPenguinImageView.setPreserveRatio(true);
 
         tuxPenguinImageView.setFitWidth(400);
         tuxPenguinImageView.setFitHeight(600);
         tuxPenguinImageView.setTranslateX(350);
-        tuxPenguinImageView.setTranslateY(200);
-//        tuxPenguinImageView.setPreserveRatio(true);
+        tuxPenguinImageView.setTranslateY(250);
+        tuxPenguinImageView.setPreserveRatio(true);
 
         kingPenguinImageView.setFitWidth(400);
         kingPenguinImageView.setFitHeight(600);
         kingPenguinImageView.setTranslateX(350);
-        kingPenguinImageView.setTranslateY(200);
-//        kingPenguinImageView.setPreserveRatio(true);
+        kingPenguinImageView.setTranslateY(250);
+        kingPenguinImageView.setPreserveRatio(true);
 
         rockStarPenguinImageView.setFitWidth(400);
         rockStarPenguinImageView.setFitHeight(600);
         rockStarPenguinImageView.setTranslateX(350);
-        rockStarPenguinImageView.setTranslateY(200);
-//        rockStarPenguinImageView.setPreserveRatio(true);
+        rockStarPenguinImageView.setTranslateY(250);
+        rockStarPenguinImageView.setPreserveRatio(true);
 
         neoSamuraiPenguinImageView.setFitWidth(400);
         neoSamuraiPenguinImageView.setFitHeight(600);
         neoSamuraiPenguinImageView.setTranslateX(350);
-        neoSamuraiPenguinImageView.setTranslateY(200);
-//        neoSamuraiPenguinImageView.setPreserveRatio(true);
+        neoSamuraiPenguinImageView.setTranslateY(250);
+        neoSamuraiPenguinImageView.setPreserveRatio(true);
 
         astronautPenguinImageView.setFitWidth(400);
         astronautPenguinImageView.setFitHeight(600);
         astronautPenguinImageView.setTranslateX(350);
-        astronautPenguinImageView.setTranslateY(200);
-//        astronautPenguinImageView.setPreserveRatio(true);
+        astronautPenguinImageView.setTranslateY(250);
+        astronautPenguinImageView.setPreserveRatio(true);
 
         saxophonePenguinImageView.setFitWidth(400);
         saxophonePenguinImageView.setFitHeight(600);
         saxophonePenguinImageView.setTranslateX(350);
-        saxophonePenguinImageView.setTranslateY(200);
-//        saxophonePenguinImageView.setPreserveRatio(true);
+        saxophonePenguinImageView.setTranslateY(250);
+        saxophonePenguinImageView.setPreserveRatio(true);
 
         cyborgPenguinImageView.setFitWidth(400);
         cyborgPenguinImageView.setFitHeight(600);
         cyborgPenguinImageView.setTranslateX(350);
-        cyborgPenguinImageView.setTranslateY(200);
-//        cyborgPenguinImageView.setPreserveRatio(true);
+        cyborgPenguinImageView.setTranslateY(250);
+        cyborgPenguinImageView.setPreserveRatio(true);
 
         playBackground();
     }
@@ -281,7 +334,6 @@ public class Main extends Application {
             }
         });
     }
-
     public void setGameScene() throws FileNotFoundException
     {
 //        isMainScene=false;
@@ -607,6 +659,7 @@ public class Main extends Application {
         ImageView inventoryImageView = new ImageView(inventoryImage);
         Image enterCodeImage = new Image(new FileInputStream("src/Sprites/enterCode.png"));
         ImageView enterCodeImageView = new ImageView(enterCodeImage);
+
 //        mainGroup.getChildren().remove(mainPane);
 //        mainGroup.getChildren().remove(gamePane);
         mainGroup.getChildren().add(settingsPane);
@@ -647,19 +700,22 @@ public class Main extends Application {
         blankOffImageView.setFitWidth(100);
         blankOffImageView.setPreserveRatio(true);
 
-        inventoryImageView.setTranslateX(360);
-        inventoryImageView.setTranslateY(350);
-        inventoryImageView.setFitHeight(200);
-        inventoryImageView.setFitWidth(400);
+        inventoryImageView.setTranslateX(250);
+        inventoryImageView.setTranslateY(200);
+        inventoryImageView.setFitHeight(100);
+        inventoryImageView.setFitWidth(200);
         inventoryImageView.setPreserveRatio(true);
 
-        enterCodeImageView.setTranslateX(360);
-        enterCodeImageView.setTranslateY(500);
-        enterCodeImageView.setFitHeight(200);
-        enterCodeImageView.setFitWidth(400);
+        enterCodeImageView.setTranslateX(250);
+        enterCodeImageView.setTranslateY(300);
+        enterCodeImageView.setFitHeight(100);
+        enterCodeImageView.setFitWidth(200);
         enterCodeImageView.setPreserveRatio(true);
 
-        settingsPane.getChildren().addAll(ssbackButtonImageView, backgroundTextImageView, greenOnImageView, blankOffImageView,enterCodeImageView,inventoryImageView);
+        codeEnter.setTranslateX(550);
+        codeEnter.setTranslateY(300);
+
+        settingsPane.getChildren().addAll(ssbackButtonImageView, backgroundTextImageView, greenOnImageView, blankOffImageView,enterCodeImageView,inventoryImageView,codeEnter);
 
         ssbackButtonImageView.setOnMouseClicked(mouseEvent ->
         {
@@ -680,6 +736,17 @@ public class Main extends Application {
             settingsPane.getChildren().addAll(greenOffImageView,blankOnImageView);
             stopBackground();
         });
+
+        enterCodeImageView.setOnMouseClicked(mouseEvent ->
+        {
+            enterCode();
+        });
+
+        inventoryImageView.setOnMouseClicked(mouseEvent ->
+        {
+            openInventoryScene();
+        });
+
 
 
     }
@@ -1081,7 +1148,7 @@ public class Main extends Application {
 
         Text gameSpeech = new Text(fishingSpeech1);
         Text compostText = new Text("Compost");
-        Text paperText = new Text("Landfill");
+        Text paperText = new Text("Paper");
         Text plasticText = new Text("Plastic");
 
         mainGroup.getChildren().add(papaGamePane);
@@ -1234,8 +1301,8 @@ public class Main extends Application {
         {
             if (!(itemInLake)) {
                 itemInLake = true;
-                fishingCategoryGacha = getRandomNumber(0, 4); //generates number from 0 to 3
-                fishingItemGacha = getRandomNumber(0, 2); //generates number from 0 to 2
+                fishingCategoryGacha = getRandomNumber(0, 3); //generates number from 0 to 3
+                fishingItemGacha = getRandomNumber(0, 1); //generates number from 0 to 2
                 if (fishingCategoryGacha == 0) //refers to compostArr
                 {
                     isCompost = true;
@@ -1377,6 +1444,10 @@ public class Main extends Application {
         Image iceCubeImage = new Image(new FileInputStream("src/Sprites/icecubes.png"));
         ImageView iceCubeImageView = new ImageView(iceCubeImage);
         Text mgsIceCubeTextHolder = new Text("");
+        Text mamaEncouragementText = new Text("Click on the ice cubes to reveal the cards! Can you match them all?");
+        mamaEncouragementText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        mamaEncouragementText.setTranslateY(-50);
+        mamaEncouragementText.setTranslateX(330);
 
         Image mgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
         ImageView mgsbackButtonImageView = new ImageView(mgsbackButtonImage);
@@ -1428,33 +1499,31 @@ public class Main extends Application {
 //        ImageView placeholderView16 = new ImageView(iceCard);
 
         Image appleImage1 = new Image(new FileInputStream("src/MinigameSprites/Compost/apple.png"));
-        Image appleImage2 = new Image(new FileInputStream("src/MinigameSprites/Compost/apple.png"));
         Image bananaImage1 = new Image(new FileInputStream("src/MinigameSprites/Compost/banana.png"));
-        Image bananaImage2 = new Image(new FileInputStream("src/MinigameSprites/Compost/banana.png"));
         Image cardboardImage1 = new Image(new FileInputStream("src/MinigameSprites/Landfill/cardboard.png"));
-        Image cardboardImage2 = new Image(new FileInputStream("src/MinigameSprites/Landfill/cardboard.png"));
         Image newspaperImage1 = new Image(new FileInputStream("src/MinigameSprites/Landfill/newspaper.png"));
-        Image newspaperImage2 = new Image(new FileInputStream("src/MinigameSprites/Landfill/newspaper.png"));
         Image milkImage1 = new Image(new FileInputStream("src/MinigameSprites/Plastic/milk.png"));
-        Image milkImage2 = new Image(new FileInputStream("src/MinigameSprites/Plastic/milk.png"));
         Image waterBottleImage1 = new Image(new FileInputStream("src/MinigameSprites/Plastic/waterBottle.png"));
-        Image waterBottleImage2 = new Image(new FileInputStream("src/MinigameSprites/Plastic/waterBottle.png"));
         Image fishImage1 = new Image(new FileInputStream("src/MinigameSprites/Bonus/fish.png"));
-        Image fishImage2 = new Image(new FileInputStream("src/MinigameSprites/Bonus/fish.png"));
         Image krillImage1 = new Image(new FileInputStream("src/MinigameSprites/Bonus/krill.png"));
-        Image krillImage2 = new Image(new FileInputStream("src/MinigameSprites/Bonus/krill.png"));
 
-        Image[] appleImageArr = {appleImage1, appleImage2};
-        Image[] bananaImageArr = {bananaImage1, bananaImage2};
-        Image[] cardboardImageArr = {cardboardImage1, cardboardImage2};
-        Image[] newspaperImageArr = {newspaperImage1, newspaperImage2};
-        Image[] milkImageArr = {milkImage1, milkImage2};
-        Image[] waterBottleImageArr = {waterBottleImage1, waterBottleImage2};
-        Image[] fishImageArr = {fishImage1, fishImage2};
-        Image[] krillImageArr = {krillImage1, krillImage2};
-
-        Image[] currentImageList = {appleImage1, appleImage2, bananaImage1, bananaImage2, cardboardImage1, cardboardImage2, newspaperImage1,
-                newspaperImage2, milkImage1, milkImage2, waterBottleImage1, waterBottleImage2, fishImage1, fishImage2, krillImage1, krillImage2};
+        ArrayList<Image> currentArr = new ArrayList<>();
+        currentArr.add(appleImage1);
+        currentArr.add(appleImage1);
+        currentArr.add(bananaImage1);
+        currentArr.add(bananaImage1);
+        currentArr.add(cardboardImage1);
+        currentArr.add(cardboardImage1);
+        currentArr.add(newspaperImage1);
+        currentArr.add(newspaperImage1);
+        currentArr.add(milkImage1);
+        currentArr.add(milkImage1);
+        currentArr.add(waterBottleImage1);
+        currentArr.add(waterBottleImage1);
+        currentArr.add(fishImage1);
+        currentArr.add(fishImage1);
+        currentArr.add(krillImage1);
+        currentArr.add(krillImage1);
 
         ArrayList<ImageView> cardArr = new ArrayList<>();
         cardArr.add(card1);
@@ -1474,11 +1543,12 @@ public class Main extends Application {
         cardArr.add(card15);
         cardArr.add(card16);
 
+        Collections.shuffle(currentArr);
 
         mainGroup.getChildren().add(mamaGamePane);
         mamaGamePane.getChildren().add(textBubbleImageView);
 //        mamaGamePane.getChildren().addAll(placeholderView1,placeholderView2,placeholderView3,placeholderView4,placeholderView5,placeholderView6,placeholderView7,placeholderView8,placeholderView9,placeholderView10,placeholderView11,placeholderView12,placeholderView13,placeholderView14,placeholderView15,placeholderView16);
-        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView, confettiGIFImageView, card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16, mgsIceCubeTextHolder, iceCubeImageView);
+        mamaGamePane.getChildren().addAll(mgsbackButtonImageView, mamaPenguinImageView,mamaPortraitImageView, confettiGIFImageView, card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16, mgsIceCubeTextHolder, iceCubeImageView, mamaEncouragementText);
 
         mamaPortraitImageView.setFitHeight(200);
         mamaPortraitImageView.setFitWidth(200);
@@ -1533,105 +1603,151 @@ public class Main extends Application {
         card1.setFitWidth(125);
         card1.setTranslateY(150);
         card1.setTranslateX(10);
-        card1.setPreserveRatio(true);
+//        card1.setPreserveRatio(true);
 
         card2.setFitHeight(125);
         card2.setFitWidth(125);
         card2.setTranslateY(275);
         card2.setTranslateX(10);
-        card2.setPreserveRatio(true);
+//        card2.setPreserveRatio(true);
 
         card3.setFitHeight(125);
         card3.setFitWidth(125);
         card3.setTranslateY(400);
         card3.setTranslateX(10);
-        card3.setPreserveRatio(true);
+//        card3.setPreserveRatio(true);
 
         card4.setFitHeight(125);
         card4.setFitWidth(125);
         card4.setTranslateY(525);
         card4.setTranslateX(10);
-        card4.setPreserveRatio(true);
+//        card4.setPreserveRatio(true);
 
         card5.setFitHeight(125);
         card5.setFitWidth(125);
         card5.setTranslateY(150);
         card5.setTranslateX(135);
-        card5.setPreserveRatio(true);
+//        card5.setPreserveRatio(true);
 
         card6.setFitHeight(125);
         card6.setFitWidth(125);
         card6.setTranslateY(275);
         card6.setTranslateX(135);
-        card6.setPreserveRatio(true);
+//        card6.setPreserveRatio(true);
 
         card7.setFitHeight(125);
         card7.setFitWidth(125);
         card7.setTranslateY(400);
         card7.setTranslateX(135);
-        card7.setPreserveRatio(true);
+//        card7.setPreserveRatio(true);
 
         card8.setFitHeight(125);
         card8.setFitWidth(125);
         card8.setTranslateY(525);
         card8.setTranslateX(135);
-        card8.setPreserveRatio(true);
+//        card8.setPreserveRatio(true);
 
         card9.setFitHeight(125);
         card9.setFitWidth(125);
         card9.setTranslateY(150);
         card9.setTranslateX(260);
-        card9.setPreserveRatio(true);
+//        card9.setPreserveRatio(true);
 
         card10.setFitHeight(125);
         card10.setFitWidth(125);
         card10.setTranslateY(275);
         card10.setTranslateX(260);
-        card10.setPreserveRatio(true);
+//        card10.setPreserveRatio(true);
 
         card11.setFitHeight(125);
         card11.setFitWidth(125);
         card11.setTranslateY(400);
         card11.setTranslateX(260);
-        card11.setPreserveRatio(true);
+//        card11.setPreserveRatio(true);
 
         card12.setFitHeight(125);
         card12.setFitWidth(125);
         card12.setTranslateY(525);
         card12.setTranslateX(260);
-        card12.setPreserveRatio(true);
+//        card12.setPreserveRatio(true);
 
         card13.setFitHeight(125);
         card13.setFitWidth(125);
         card13.setTranslateY(150);
         card13.setTranslateX(385);
-        card13.setPreserveRatio(true);
+//        card13.setPreserveRatio(true);
 
         card14.setFitHeight(125);
         card14.setFitWidth(125);
         card14.setTranslateY(275);
         card14.setTranslateX(385);
-        card14.setPreserveRatio(true);
+//        card14.setPreserveRatio(true);
 
         card15.setFitHeight(125);
         card15.setFitWidth(125);
         card15.setTranslateY(400);
         card15.setTranslateX(385);
-        card15.setPreserveRatio(true);
+//        card15.setPreserveRatio(true);
 
         card16.setFitHeight(125);
         card16.setFitWidth(125);
         card16.setTranslateY(525);
         card16.setTranslateX(385);
-        card16.setPreserveRatio(true);
+//        card16.setPreserveRatio(true);
 
-        for (int i = 0; i < cardArr.size(); i++)
-        {
-            cardArr.get(i).setOnMouseClicked(mouseEvent ->
-            {
 
+        //Note: currentArr & cardArr should have the same indices
+        for (int i = 0; i < cardArr.size(); i++) {
+            final int index = i;
+            Image image1 = currentArr.get(index);
+
+
+
+            cardArr.get(i).setOnMouseClicked(mouseEvent -> {
+                if (cardArr.get(index).getImage().equals(iceCard))
+                {
+                    winCheckerCount = 0;
+                    if (flippedOverCount < 1)
+                    {
+                        flippedOverCardArr.add(cardArr.get(index));
+                        cardArr.get(index).setImage(currentArr.get(index));
+                        flippedOverCount++;
+                    }
+                    else if (flippedOverCount < 2)
+                    {
+                        flippedOverCardArr.add(cardArr.get(index));
+                        cardArr.get(index).setImage(currentArr.get(index));
+                        PauseTransition pause = new PauseTransition(Duration.millis(500));
+                        pause.setOnFinished(e -> {
+                            if (flippedOverCardArr.get(0).getImage().equals(flippedOverCardArr.get(1).getImage())) {
+                                //check for win
+                                for (ImageView card: cardArr){
+                                    if (!(card.getImage().equals(iceCard)))
+                                    {
+                                        winCheckerCount++;
+                                    }
+                                    if (winCheckerCount == 16)
+                                    {
+                                        iceCubes += 300;
+                                    }
+                                }
+                            } else {
+                                flippedOverCardArr.get(0).setImage(iceCard);
+                                flippedOverCardArr.get(1).setImage(iceCard);
+                            }
+                            flippedOverCardArr.clear();
+                            flippedOverCount = 0;
+                        });
+                        pause.play();
+                    }
+                }
+////                System.out.println(cardArr.get(index).get);
+//                cardArr.get(index).setImage(currentArr.get(index));
+////                System.out.println(cardArr.get(index));
+//                System.out.println(image1);
             });
         }
+
 
 
 
@@ -1743,7 +1859,10 @@ public class Main extends Application {
                     {
                         pullName="neo";
                     }
-                    pullName="pop";
+                    else
+                    {
+                        pullName="pop";
+                    }
                 }
                 else if (ranNum==3) {
                     int ran = getRandomNumber(1,2);
@@ -1751,21 +1870,30 @@ public class Main extends Application {
                     {
                         pullName="rock";
                     }
-                    pullName="sax";
+                    else
+                    {
+                        pullName="sax";
+                    }
                 }
                 else if (ranNum==2) {
                     int ran = getRandomNumber(1, 2);
                     if (ran == 1) {
                         pullName = "cyb";
                     }
-                    pullName = "king";
+                    else
+                    {
+                        pullName = "king";
+                    }
                 }
                 else if (ranNum==1) {
                     int ran = getRandomNumber(1, 2);
                     if (ran == 1) {
                         pullName = "tux";
                     }
-                    pullName = "astro";
+                    else
+                    {
+                        pullName = "astro";
+                    }
                 }
                 openPullScene();
             }
@@ -1780,136 +1908,54 @@ public class Main extends Application {
 
     public void setPullScene() throws FileNotFoundException
     {
-//        Image tuxPenguinImage = new Image(new FileInputStream("src/Sprites/tuxPenguinPlush.png"));
-//        ImageView tuxPenguinImageView = new ImageView(tuxPenguinImage);
-//        Image astronautPenguinImage = new Image(new FileInputStream("src/Sprites/astronautPenguinPlush.png"));
-//        ImageView astronautPenguinImageView = new ImageView(astronautPenguinImage);
-//        Image cyborgPenguinImage = new Image(new FileInputStream("src/Sprites/cyborgPenguinPlush.png"));
-//        ImageView cyborgPenguinImageView = new ImageView(cyborgPenguinImage);
-//        Image kingPenguinImage = new Image(new FileInputStream("src/Sprites/kingPenguinPlush.png"));
-//        ImageView kingPenguinImageView = new ImageView(kingPenguinImage);
-//        Image rockStarPenguinImage = new Image(new FileInputStream("src/Sprites/rockStarPenguinPlush.png"));
-//        ImageView rockStarPenguinImageView = new ImageView(rockStarPenguinImage);
-//        Image saxophonePenguinImage = new Image(new FileInputStream("src/Sprites/saxophonePenguinPlush.png"));
-//        ImageView saxophonePenguinImageView = new ImageView(saxophonePenguinImage);
-//        Image neoSamuraiPenguinImage = new Image(new FileInputStream("src/Sprites/neoSamuraiPenguinPlush.png"));
-//        ImageView neoSamuraiPenguinImageView = new ImageView(neoSamuraiPenguinImage);
-//        Image popStarPenguinImage = new Image(new FileInputStream("src/Sprites/popStarPenguinPlush.png"));
-//        ImageView popStarPenguinImageView = new ImageView(popStarPenguinImage);
+
         Image sgsbackButtonImage = new Image(new FileInputStream("src/Sprites/backButton.png"));
         ImageView sgsbackButtonImageView = new ImageView(sgsbackButtonImage);
 
-        //moved to start() method
-//        Text pulltext = new Text("What did you get?");
+        Image hatchAgainImage = new Image(new FileInputStream("src/Sprites/hatchAgain.png"));
+        ImageView hatchAgainImageView = new ImageView(hatchAgainImage);
 
-        //moved to openPullScene() method
-//        if(pullName=="neo")
-//        {
-//            pullPane.getChildren().add(neoSamuraiPenguinImageView);
-//            pulltext.setText("You got a NEOSAMURAIPENGUINPLUSH");
-//        }
-//        if(pullName=="rock")
-//        {
-//            pullPane.getChildren().add(rockStarPenguinImageView);
-//            pulltext.setText("You got a ROCKSTARPENGUINPLUSH");
-//        }
-//        if(pullName=="astro")
-//        {
-//            pullPane.getChildren().add(astronautPenguinImageView);
-//            pulltext.setText("You got a ASTRONAUTPENGUINPLUSH");
-//        }
-//        if(pullName=="cyb")
-//        {
-//            pullPane.getChildren().add(cyborgPenguinImageView);
-//            pulltext.setText("You got a CYBORGPENGUINPLUSH");
-//        }
-//        if(pullName=="pop")
-//        {
-//            pullPane.getChildren().add(cyborgPenguinImageView);
-//            pulltext.setText("You got a POPSTARPENGUINPLUSH");
-//        }
-//        if(pullName=="tux")
-//        {
-//            pullPane.getChildren().add(tuxPenguinImageView);
-//            pulltext.setText("You got a TUXPENGUINPLUSH");
-//        }
-//        if(pullName=="sax")
-//        {
-//            pullPane.getChildren().add(saxophonePenguinImageView);
-//            pulltext.setText("You got a SAXOPHONEPENGUINPLUSH");
-//        }
-//
-//        if(pullName=="king")
-//        {
-//            pullPane.getChildren().add(kingPenguinImageView);
-//            pulltext.setText("You got a KINGPENGUINPLUSH");
-//        }
-
-        //moved to start() method
-//        pulltext.setTranslateY(0);
-//        pulltext.setTranslateX(350);
-//
-//        pulltext.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        Image iceCubeImage = new Image(new FileInputStream("src/Sprites/icecubes.png"));
+        ImageView iceCubeImageView = new ImageView(iceCubeImage);
+        Text psIceCubeTextHolder = new Text("");
 
 
         mainGroup.getChildren().add(pullPane);
-        pullPane.getChildren().addAll(sgsbackButtonImageView);
+        pullPane.getChildren().addAll(sgsbackButtonImageView,hatchAgainImageView, iceCubeImageView, psIceCubeTextHolder);
         pullPane.getChildren().add(pulltext);
 
-        //moved to start() method
-//        popStarPenguinImageView.setFitWidth(600);
-//        popStarPenguinImageView.setFitHeight(600);
-//        popStarPenguinImageView.setTranslateX(450);
-//        popStarPenguinImageView.setTranslateY(200);
-//        popStarPenguinImageView.setPreserveRatio(true);
-//
-//        tuxPenguinImageView.setFitWidth(600);
-//        tuxPenguinImageView.setFitHeight(600);
-//        tuxPenguinImageView.setTranslateX(450);
-//        tuxPenguinImageView.setTranslateY(200);
-//        tuxPenguinImageView.setPreserveRatio(true);
-//
-//        kingPenguinImageView.setFitWidth(600);
-//        kingPenguinImageView.setFitHeight(600);
-//        kingPenguinImageView.setTranslateX(450);
-//        kingPenguinImageView.setTranslateY(200);
-//        kingPenguinImageView.setPreserveRatio(true);
-//
-//        rockStarPenguinImageView.setFitWidth(600);
-//        rockStarPenguinImageView.setFitHeight(600);
-//        rockStarPenguinImageView.setTranslateX(450);
-//        rockStarPenguinImageView.setTranslateY(200);
-//        rockStarPenguinImageView.setPreserveRatio(true);
-//
-//        neoSamuraiPenguinImageView.setFitWidth(600);
-//        neoSamuraiPenguinImageView.setFitHeight(600);
-//        neoSamuraiPenguinImageView.setTranslateX(450);
-//        neoSamuraiPenguinImageView.setTranslateY(200);
-//        neoSamuraiPenguinImageView.setPreserveRatio(true);
-//
-//        astronautPenguinImageView.setFitWidth(600);
-//        astronautPenguinImageView.setFitHeight(600);
-//        astronautPenguinImageView.setTranslateX(450);
-//        astronautPenguinImageView.setTranslateY(200);
-//        astronautPenguinImageView.setPreserveRatio(true);
-//
-//        saxophonePenguinImageView.setFitWidth(600);
-//        saxophonePenguinImageView.setFitHeight(600);
-//        saxophonePenguinImageView.setTranslateX(450);
-//        saxophonePenguinImageView.setTranslateY(200);
-//        saxophonePenguinImageView.setPreserveRatio(true);
-//
-//        cyborgPenguinImageView.setFitWidth(600);
-//        cyborgPenguinImageView.setFitHeight(600);
-//        cyborgPenguinImageView.setTranslateX(450);
-//        cyborgPenguinImageView.setTranslateY(200);
-//        cyborgPenguinImageView.setPreserveRatio(true);
+        iceCubeImageView.setFitHeight(75);
+        iceCubeImageView.setFitWidth(75);
+        iceCubeImageView.setTranslateY(500);
+        iceCubeImageView.setTranslateX(-230);
+        iceCubeImageView.setPreserveRatio(true);
+
+        psIceCubeTextHolder.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        psIceCubeTextHolder.setTranslateY(495);
+        psIceCubeTextHolder.setTranslateX(-180);
+
+        // calculates the initial width and set the WrappingWidth accordingly
+        double initialWidth = psIceCubeTextHolder.getLayoutBounds().getWidth();
+        psIceCubeTextHolder.setWrappingWidth(initialWidth - 200);
+
+        psIceCubeTextHolder.setTranslateX(-285);
+
+        //creates a thread that constantly updates the text of gsIceCubeRunnable
+        IceCubeRunnable psIceCubeRunnable = new IceCubeRunnable(psIceCubeTextHolder);
+        Thread psThread = new Thread(psIceCubeRunnable);
+        psThread.start();
 
         sgsbackButtonImageView.setFitHeight(100);
         sgsbackButtonImageView.setFitWidth(200);
-        sgsbackButtonImageView.setTranslateY(-250);
-        sgsbackButtonImageView.setTranslateX(-275);
+        sgsbackButtonImageView.setTranslateY(-150);
+        sgsbackButtonImageView.setTranslateX(-230);
         sgsbackButtonImageView.setPreserveRatio(true);
+
+        hatchAgainImageView.setFitHeight(100);
+        hatchAgainImageView.setFitWidth(200);
+        hatchAgainImageView.setTranslateY(-80);
+        hatchAgainImageView.setTranslateX(-230);
+        hatchAgainImageView.setPreserveRatio(true);
 //
         sgsbackButtonImageView.setOnMousePressed(event->{
 
@@ -1918,13 +1964,258 @@ public class Main extends Application {
             openGameScene();
         });
 
+        hatchAgainImageView.setOnMousePressed(event->{
+            if(iceCubes>=100)
+            {
+                iceCubes-=100;
+                int ranNum=lottery();
+                System.out.print(ranNum);
+                if(ranNum==4)
+                {
+                    int ran = getRandomNumber(1,2);
+                    if(ran==1)
+                    {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(neoSamuraiPenguinImageView);
+                        pulltext.setText("You got a NEOSAMURAIPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(legendaryImageView2);
+                        if (!(hasNeo))
+                        {
+                            inventoryPane.getChildren().add(neoSamuraiCardImageView);
+                            hasNeo = true;
+                        }
+                    }
+                    else
+                    {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(popStarCardImageView);
+                        pulltext.setText("You got a POPSTARPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(legendaryImageView1);
+                        if (!(hasPopStar))
+                        {
+                            inventoryPane.getChildren().add(popStarCardImageView);
+                            hasPopStar = true;
+                        }
+                    }
+                }
+                else if (ranNum==3) {
+                    int ran = getRandomNumber(1,2);
+                    if(ran==1)
+                    {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(rockStarPenguinImageView);
+                        pulltext.setText("You got a ROCKSTARPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(mythicImageView1);
+                        if (!(hasRockStar))
+                        {
+                            inventoryPane.getChildren().add(rockStarCardImageView);
+                            hasRockStar = true;
+                        }
+                    }
+                    else
+                    {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(saxophonePenguinImageView);
+                        pulltext.setText("You got a SAXOPHONEPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(mythicImageView2);
+                        if (!(hasSaxophone))
+                        {
+                            inventoryPane.getChildren().add(saxophoneCardImageView);
+                            hasSaxophone = true;
+                        }
+                    }
+                }
+                else if (ranNum==2) {
+                    int ran = getRandomNumber(1, 2);
+                    if (ran == 1) {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(cyborgPenguinImageView);
+                        pulltext.setText("You got a CYBORGPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(rareImageView1);
+                        if (!(hasCyborg))
+                        {
+                            inventoryPane.getChildren().add(cyborgCardImageView);
+                            hasCyborg = true;
+                        }
+                    }
+                    else
+                    {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(kingPenguinImageView);
+                        pulltext.setText("You got a KINGPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(rareImageView2);
+                        if (!(hasKing))
+                        {
+                            inventoryPane.getChildren().add(kingCardImageView);
+                            hasKing = true;
+                        }
+                    }
+                }
+                else if (ranNum==1) {
+                    int ran = getRandomNumber(1, 2);
+                    if (ran == 1) {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(tuxPenguinImageView);
+                        pulltext.setText("You got a TUXPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(commonImageView1);
+                        if (!(hasTux))
+                        {
+                            inventoryPane.getChildren().add(tuxCardImageView);
+                            hasTux = true;
+                        }
+                    }
+                    else
+                    {
+                        pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
+                        pullPane.getChildren().add(astronautPenguinImageView);
+                        pulltext.setText("You got a ASTRONAUTPENGUINPLUSH");
+                        inventoryPane.getChildren().remove(commonImageView2);
+                        if (!(hasAstronaut))
+                        {
+                            inventoryPane.getChildren().add(astronautCardImageView);
+                            hasAstronaut = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                pulltext.setText("Silly Goose! You don't have enough.");
+            }
+        });
+
+
+
 
 
 
     }
 
-    public void setInventoryScene()
+    public void setInventoryScene() throws FileNotFoundException
     {
+
+
+        mainGroup.getChildren().add(inventoryPane);
+        inventoryPane.getChildren().addAll(commonImageView1,commonImageView2,rareImageView1,rareImageView2,mythicImageView1,mythicImageView2,legendaryImageView1,legendaryImageView2,majesticImageView,sgsbackButtonImageView);
+
+        sgsbackButtonImageView.setFitHeight(100);
+        sgsbackButtonImageView.setFitWidth(200);
+        sgsbackButtonImageView.setTranslateY(-80);
+        sgsbackButtonImageView.setTranslateX(0);
+        sgsbackButtonImageView.setPreserveRatio(true);
+
+        commonImageView1.setFitHeight(250);
+        commonImageView1.setFitWidth(450);
+        commonImageView1.setTranslateY(100);
+        commonImageView1.setTranslateX(150);
+        commonImageView1.setPreserveRatio(true);
+
+        tuxCardImageView.setFitHeight(250);
+        tuxCardImageView.setFitWidth(450);
+        tuxCardImageView.setTranslateY(100);
+        tuxCardImageView.setTranslateX(150);
+        tuxCardImageView.setPreserveRatio(true);
+
+        commonImageView2.setFitHeight(250);
+        commonImageView2.setFitWidth(450);
+        commonImageView2.setTranslateY(450);
+        commonImageView2.setTranslateX(150);
+        commonImageView2.setPreserveRatio(true);
+
+        astronautCardImageView.setFitHeight(250);
+        astronautCardImageView.setFitWidth(450);
+        astronautCardImageView.setTranslateY(450);
+        astronautCardImageView.setTranslateX(150);
+        astronautCardImageView.setPreserveRatio(true);
+
+        rareImageView1.setFitHeight(250);
+        rareImageView1.setFitWidth(450);
+        rareImageView1.setTranslateY(100);
+        rareImageView1.setTranslateX(400);
+        rareImageView1.setPreserveRatio(true);
+
+        cyborgCardImageView.setFitHeight(250);
+        cyborgCardImageView.setFitWidth(450);
+        cyborgCardImageView.setTranslateY(100);
+        cyborgCardImageView.setTranslateX(400);
+        cyborgCardImageView.setPreserveRatio(true);
+
+        rareImageView2.setFitHeight(250);
+        rareImageView2.setFitWidth(450);
+        rareImageView2.setTranslateY(450);
+        rareImageView2.setTranslateX(400);
+        rareImageView2.setPreserveRatio(true);
+
+        kingCardImageView.setFitHeight(250);
+        kingCardImageView.setFitWidth(450);
+        kingCardImageView.setTranslateY(450);
+        kingCardImageView.setTranslateX(400);
+        kingCardImageView.setPreserveRatio(true);
+
+        mythicImageView1.setFitHeight(250);
+        mythicImageView1.setFitWidth(450);
+        mythicImageView1.setTranslateY(100);
+        mythicImageView1.setTranslateX(650);
+        mythicImageView1.setPreserveRatio(true);
+
+        rockStarCardImageView.setFitHeight(250);
+        rockStarCardImageView.setFitWidth(450);
+        rockStarCardImageView.setTranslateY(100);
+        rockStarCardImageView.setTranslateX(650);
+        rockStarCardImageView.setPreserveRatio(true);
+
+        mythicImageView2.setFitHeight(250);
+        mythicImageView2.setFitWidth(450);
+        mythicImageView2.setTranslateY(450);
+        mythicImageView2.setTranslateX(650);
+        mythicImageView2.setPreserveRatio(true);
+
+        saxophoneCardImageView.setFitHeight(250);
+        saxophoneCardImageView.setFitWidth(450);
+        saxophoneCardImageView.setTranslateY(450);
+        saxophoneCardImageView.setTranslateX(650);
+        saxophoneCardImageView.setPreserveRatio(true);
+
+        legendaryImageView1.setFitHeight(250);
+        legendaryImageView1.setFitWidth(450);
+        legendaryImageView1.setTranslateY(100);
+        legendaryImageView1.setTranslateX(900);
+        legendaryImageView1.setPreserveRatio(true);
+
+        popStarCardImageView.setFitHeight(250);
+        popStarCardImageView.setFitWidth(450);
+        popStarCardImageView.setTranslateY(100);
+        popStarCardImageView.setTranslateX(900);
+        popStarCardImageView.setPreserveRatio(true);
+
+        legendaryImageView2.setFitHeight(250);
+        legendaryImageView2.setFitWidth(450);
+        legendaryImageView2.setTranslateY(450);
+        legendaryImageView2.setTranslateX(900);
+        legendaryImageView2.setPreserveRatio(true);
+
+        neoSamuraiCardImageView.setFitHeight(250);
+        neoSamuraiCardImageView.setFitWidth(450);
+        neoSamuraiCardImageView.setTranslateY(450);
+        neoSamuraiCardImageView.setTranslateX(900);
+        neoSamuraiCardImageView.setPreserveRatio(true);
+
+
+        majesticImageView.setFitHeight(250);
+        majesticImageView.setFitWidth(450);
+        majesticImageView.setTranslateY(250);
+        majesticImageView.setTranslateX(1150);
+        majesticImageView.setPreserveRatio(true);
+
+        poity1CardImageView.setFitHeight(250);
+        poity1CardImageView.setFitWidth(450);
+        poity1CardImageView.setTranslateY(250);
+        poity1CardImageView.setTranslateX(1150);
+        poity1CardImageView.setPreserveRatio(true);
+
+        sgsbackButtonImageView.setOnMouseClicked(event -> {
+            openSettingsScene();
+        });
 
     }
     //updates isScene variables to whatever String is inputted into the parameter
@@ -2230,44 +2521,94 @@ public class Main extends Application {
         System.out.println(pullName);
         if(pullName=="neo")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(neoSamuraiPenguinImageView);
             pulltext.setText("You got a NEOSAMURAIPENGUINPLUSH");
+            inventoryPane.getChildren().remove(legendaryImageView2);
+            inventoryPane.getChildren().add(neoSamuraiCardImageView);
+            if (!(hasNeo)) {
+                inventoryPane.getChildren().add(neoSamuraiCardImageView);
+                hasNeo = true;
+            }
+
         }
         if(pullName=="rock")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(rockStarPenguinImageView);
             pulltext.setText("You got a ROCKSTARPENGUINPLUSH");
+            inventoryPane.getChildren().remove(mythicImageView1);
+            if (!(hasRockStar)) {
+                inventoryPane.getChildren().add(rockStarCardImageView);
+                hasRockStar = true;
+            }
         }
         if(pullName=="astro")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(astronautPenguinImageView);
             pulltext.setText("You got a ASTRONAUTPENGUINPLUSH");
+            inventoryPane.getChildren().remove(commonImageView2);
+            if (!(hasAstronaut)) {
+                inventoryPane.getChildren().add(astronautCardImageView);
+                hasAstronaut = true;
+            }
         }
         if(pullName=="cyb")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(cyborgPenguinImageView);
             pulltext.setText("You got a CYBORGPENGUINPLUSH");
+            inventoryPane.getChildren().remove(rareImageView1);
+            if (!(hasCyborg)) {
+                inventoryPane.getChildren().add(cyborgCardImageView);
+                hasCyborg = true;
+            }
         }
         if(pullName=="pop")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(cyborgPenguinImageView);
             pulltext.setText("You got a POPSTARPENGUINPLUSH");
+            inventoryPane.getChildren().remove(legendaryImageView1);
+            if (!(hasPopStar)) {
+                inventoryPane.getChildren().add(popStarCardImageView);
+                hasPopStar = true;
+            }
         }
         if(pullName=="tux")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(tuxPenguinImageView);
             pulltext.setText("You got a TUXPENGUINPLUSH");
+            inventoryPane.getChildren().remove(commonImageView1);
+            if (!(hasTux)) {
+                inventoryPane.getChildren().add(tuxCardImageView);
+                hasTux = true;
+            }
         }
         if(pullName=="sax")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(saxophonePenguinImageView);
             pulltext.setText("You got a SAXOPHONEPENGUINPLUSH");
+            inventoryPane.getChildren().remove(mythicImageView2);
+            if (!(hasSaxophone)) {
+                inventoryPane.getChildren().add(saxophoneCardImageView);
+                hasSaxophone =true;
+            }
         }
 
         if(pullName=="king")
         {
+            pullPane.getChildren().removeAll(neoSamuraiPenguinImageView,popStarPenguinImageView,rockStarPenguinImageView,saxophonePenguinImageView,cyborgPenguinImageView,kingPenguinImageView,tuxPenguinImageView,astronautPenguinImageView);
             pullPane.getChildren().add(kingPenguinImageView);
             pulltext.setText("You got a KINGPENGUINPLUSH");
+            inventoryPane.getChildren().remove(rareImageView2);
+            if (!(hasKing)) {
+                inventoryPane.getChildren().add(kingCardImageView);
+                hasKing = true;
+            }
         }
 
 //        pulltext.setTranslateY(0);
@@ -2295,7 +2636,7 @@ public class Main extends Application {
         mainGroup.getChildren().remove(settingsPane);
         mainGroup.getChildren().remove(babyGamePane);
         mainGroup.getChildren().remove(papaGamePane);
-        mainGroup.getChildren().add(shopPane);
+        mainGroup.getChildren().remove(shopPane);
         mainGroup.getChildren().add(inventoryPane);
         mainGroup.getChildren().remove(pullPane);
         updateIsSceneVariables("inventoryScene"); //updates current scene to shopScene because shopScene is currently opened
@@ -2346,7 +2687,7 @@ public class Main extends Application {
 
     //generates random number from min to max
     public static int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
+        return (int) ((Math.random() * (max - min + 1)) + min);
     }
 
     //creates confetti animation for the fishing
@@ -2442,10 +2783,28 @@ public class Main extends Application {
         {
             blank.add(4);
         }
-        return blank.get(getRandomNumber(0,blank.toArray().length));
+        return blank.get(getRandomNumber(0,blank.toArray().length+1));
     }
 
-
-
-
+    public void enterCode() {
+        String input = codeEnter.getText();
+        if (input.equals("119EMERGENCYLOVE")) {
+            iceCubes=119119119;
+        }
+        else if (input.equals("SUBTOPOITY1"))
+        {
+            iceCubes=2121212121;
+            inventoryPane.getChildren().remove(majesticImageView);
+            inventoryPane.getChildren().add(poity1CardImageView);
+        }
+        else if(input.equals("LEBRONSBEEEEEEHTHEGOATSSKIBIDIOHIOGYATT69"))
+        {
+            iceCubes=23232323;
+            inventoryPane.getChildren().removeAll(majesticImageView,commonImageView1,commonImageView2,rareImageView1,rareImageView2,mythicImageView1,mythicImageView2,legendaryImageView1,legendaryImageView2);
+            inventoryPane.getChildren().addAll(poity1CardImageView,neoSamuraiCardImageView,popStarCardImageView,saxophoneCardImageView,rockStarCardImageView,cyborgCardImageView,kingCardImageView,tuxCardImageView,astronautCardImageView);
+        }
+        else {
+            codeEnter.setText("INVALID!!!");
+        }
+    }
 }

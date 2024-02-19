@@ -2,13 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99944dbe-639a-437e-ab7b-350d1a7900b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/enterCode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/inventory.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/popStarPenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/rockStarPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/astronautCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/common.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/cyborgCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/kingCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/legendary.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/majestic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/mythic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/neoSamuraiCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/poity1Card.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/popStarCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/rare.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/rockStarCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/saxophoneCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/tuxCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/hatchAgain.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IceCubeRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IceCubeRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708293982376</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Shop is WIP and added memory game">
+      <created>1708300740347</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708300740347</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -174,7 +191,8 @@
     <MESSAGE value="Completely finished fishing minigame" />
     <MESSAGE value="began development of quiz minigame" />
     <MESSAGE value="fully completed quiz minigame and began shop" />
-    <option name="LAST_COMMIT_MESSAGE" value="fully completed quiz minigame and began shop" />
+    <MESSAGE value="Shop is WIP and added memory game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Shop is WIP and added memory game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
