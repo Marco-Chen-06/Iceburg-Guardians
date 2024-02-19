@@ -2,29 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99944dbe-639a-437e-ab7b-350d1a7900b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Effects/confetti.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Bonus/fish.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Bonus/krill.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Compost/apple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Compost/banana.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Landfill/cardboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Landfill/newspaper.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Plastic/milk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Plastic/waterBottle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/astronautPenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/cleanbabyPenguin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/cleanmamaPenguin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/cleanpapaPenguin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/cyborgPenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/fishingpond.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/icecubes.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/kingPenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/neoSamuraiPenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/poity1PenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/popStartPenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/saxophonePenguinPlush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sprites/tuxPenguinPlush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/astronautCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/common.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/cyborgCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/kingCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/legendary.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/majestic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/mythic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/neoSamuraiCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/poity1Card.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/popStarCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/rare.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/rockStarCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/saxophoneCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinigameSprites/Shop/tuxCard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sprites/hatchAgain.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +55,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/poity/OneDrive/Desktop/Java Files/openjfx-21.0.2_windows-x64_bin-sdk/javafx-sdk-21.0.2/lib&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/poity/Downloads&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
@@ -69,11 +63,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Sprites" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Shop" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\Effects" />
+      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\MatchingGame" />
       <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Bonus" />
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Recycle" />
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Landfill" />
-      <recent name="C:\Users\poity\OneDrive\Desktop\IntelliJ Projects\Penguin_Game\src\MinigameSprites\Compost" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -140,7 +134,42 @@
       <option name="project" value="LOCAL" />
       <updated>1708214609908</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added fishing minigame and shop">
+      <created>1708237298499</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708237298499</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Completely finished fishing minigame">
+      <created>1708285948251</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708285948251</updated>
+    </task>
+    <task id="LOCAL-00007" summary="began development of quiz minigame">
+      <created>1708289159352</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708289159352</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fully completed quiz minigame and began shop">
+      <created>1708293982376</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708293982376</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Shop is WIP and added memory game">
+      <created>1708300740347</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708300740347</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,7 +187,12 @@
     <MESSAGE value="Added initial code for game" />
     <MESSAGE value="Added GUI without functionality" />
     <MESSAGE value="Added text and placeholder minigames" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added text and placeholder minigames" />
+    <MESSAGE value="Added fishing minigame and shop" />
+    <MESSAGE value="Completely finished fishing minigame" />
+    <MESSAGE value="began development of quiz minigame" />
+    <MESSAGE value="fully completed quiz minigame and began shop" />
+    <MESSAGE value="Shop is WIP and added memory game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Shop is WIP and added memory game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
